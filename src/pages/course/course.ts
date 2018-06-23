@@ -16,7 +16,7 @@ import { ConfigService } from '../../services/config';
 import { UserService } from '../../services/users';
 import { CourseStatusPage } from '../course-status/course-status';
 
-import { WalletService } from '../../services/wallet';
+//import { WalletService } from '../../services/wallet';
 
 import { LazyImgComponent }   from '../components/lazy-img/lazy-img';
 import { LazyLoadDirective }   from '../directives/lazy-load.directive';
@@ -60,7 +60,7 @@ export class CoursePage implements OnInit{
       private toastCtrl:ToastController,
       private loadingCtrl:LoadingController,
       private iab:InAppBrowser,
-      private walletService: WalletService,
+      //private walletService: WalletService,
       private alertCtrl: AlertController){}
 
       ngOnInit(){      
@@ -85,9 +85,9 @@ export class CoursePage implements OnInit{
           //Get Wallet -> 
             
             if(this.config.isLoggedIn){
-              this.walletService.getWallet(true).subscribe(res=>{
+              /*this.walletService.getWallet(true).subscribe(res=>{
                 console.log(res);
-              });
+              });*/
             }
 
         loading.present();
@@ -431,6 +431,7 @@ export class CoursePage implements OnInit{
       }
 
       handleWalletPayment(pricing){
+        /*
           if(this.config.isLoggedIn){
               console.log(this.walletService.wallet);
               
@@ -479,7 +480,7 @@ export class CoursePage implements OnInit{
                     this.navCtrl.setRoot(ProfilePage,{});       
                 });  
               
-          }
+          }*/
       }
 
       isSwipedPrice(pricing){

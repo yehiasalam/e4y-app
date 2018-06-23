@@ -13,7 +13,7 @@ import { CoursePage } from '../course/course';
 
 import { CourseService } from '../../services/course';
 import { ConfigService } from '../../services/config';
-import { WalletService } from '../../services/wallet';
+//import { WalletService } from '../../services/wallet';
 
 import { WishlistService } from '../../services/wishlist';
 
@@ -50,7 +50,8 @@ export class HomePage implements OnInit{
 		public userService:UserService,
 		private config:ConfigService,
 		private wishlistService:WishlistService,
-		private walletService:WalletService ) {
+		/*private walletService:WalletService*/ 
+	) {
 		
 	}
 

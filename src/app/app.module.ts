@@ -18,13 +18,13 @@ import { PinchZoomDirective } from '../directives/pinch-zoom.directive';
 import { ImgcacheService } from "../services/imageCache";
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { InAppPurchase } from '@ionic-native/in-app-purchase';
+//import { InAppPurchase } from '@ionic-native/in-app-purchase';
 import { Camera } from '@ionic-native/camera';
 import { Device } from '@ionic-native/device';
 //import { PhotoViewer } from '@ionic-native/photo-viewer';
 
-import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
+//import { Facebook } from '@ionic-native/facebook';
+//import { GooglePlus } from '@ionic-native/google-plus';
 //End Social Logins
 
 import { Intro } from '../pages/intro/intro';
@@ -37,7 +37,7 @@ import { BlogService } from '../services/blog';
 
 import { UpdatesPage } from '../pages/updates/updates';
 import { WishlistPage } from '../pages/wishlist/wishlist';
-import { WalletPage } from '../pages/wallet/wallet';
+//import { WalletPage } from '../pages/wallet/wallet';
 
 import { CoursePage } from '../pages/course/course';
 import { CourseStatusPage } from '../pages/course-status/course-status';
@@ -90,7 +90,7 @@ import { QuizService } from '../services/quiz';
 import { ActivityService } from '../services/activity';
 import { UpdatesService } from '../services/updates';
 import { WishlistService } from '../services/wishlist';
-import { WalletService } from '../services/wallet';
+//import { WalletService } from '../services/wallet';
 
 import { DragulaModule,DragulaService} from "../../node_modules/ng2-dragula/ng2-dragula"
 
@@ -137,7 +137,7 @@ enableProdMode();
     Select,
     UpdatesPage,
     WishlistPage,
-    WalletPage,
+    //WalletPage,
     Coursecard,
     Courseblock,
     InstructorBlock,
@@ -179,7 +179,7 @@ enableProdMode();
     ReviewCoursePage,
     UpdatesPage,
     WishlistPage,
-    WalletPage,
+    //WalletPage,
     LazyImgComponent
   ],
   providers: [
@@ -188,11 +188,11 @@ enableProdMode();
   {provide: ErrorHandler, useClass: IonicErrorHandler},
   DragulaService,
   InAppBrowser,
-  InAppPurchase,
+  //InAppPurchase,
   Camera,
   Device,
-  Facebook,
-  GooglePlus,
+  //Facebook,
+  //GooglePlus,
   //Transfer,
   Storage,//PhotoViewer,
   ConfigService,
@@ -204,7 +204,7 @@ enableProdMode();
   ActivityService,
   UpdatesService, 
   WishlistService,
-  WalletService,
+  //WalletService,
   ImgcacheService,
   BlogService
   ]

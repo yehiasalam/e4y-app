@@ -16,8 +16,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { Storage } from '@ionic/storage';
 import { Device } from '@ionic-native/device';
 
-import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
+//import { Facebook } from '@ionic-native/facebook';
+//import { GooglePlus } from '@ionic-native/google-plus';
 
 @Injectable()
 export class AuthenticationService {  
@@ -46,11 +46,11 @@ export class AuthenticationService {
     	private platform : Platform,
         private storage: Storage,
         private config:ConfigService,
-        public fb: Facebook, 
+        //public fb: Facebook, 
         public loadingCtrl:LoadingController,
         public toastCtrl:ToastController,
         private iab:InAppBrowser,
-        private googlePlus: GooglePlus,
+        //private googlePlus: GooglePlus,
         private device: Device
         ) {
         
@@ -61,7 +61,7 @@ export class AuthenticationService {
         this.state = this.config.settings.state; 
 
         if(!this.config.isLoggedIn){
-            this.fb.browserInit(this.config.settings.facebook.app_id, "v2.9");    
+            //this.fb.browserInit(this.config.settings.facebook.app_id, "v2.9");    
         }
         
          
@@ -287,8 +287,8 @@ export class AuthenticationService {
 
         loading.present();
 
-
-        return Observable.fromPromise(this.googlePlus.login({}).then((res) => {
+        return Observable.of([]);
+        /*return Observable.fromPromise(this.googlePlus.login({}).then((res) => {
             console.log('Response');
             console.log(res);
             loading.dismiss();
@@ -303,12 +303,12 @@ export class AuthenticationService {
         }, (err) => {
             console.log('Error');
             console.log(err);
-        }));
+        }));*/
     }
 
     public logout(){
-        this.fb.logout();
-        this.googlePlus.logout();
+        //this.fb.logout();
+        //this.googlePlus.logout();
     }
     
     public signinUser(form:any): Observable<any>{
