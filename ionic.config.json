@@ -1,0 +1,8 @@
+{
+  "name": "e4y-app",
+  "app_id": "703b839f",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
