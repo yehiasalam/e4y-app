@@ -100,6 +100,35 @@ import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 
+// These are all imports required for Pro Client with Monitoring & Deploy
+import { Pro } from '@ionic/pro';
+import { Injectable, Injector } from '@angular/core';
+
+Pro.init('703b839f', {
+  appVersion: '1.0'
+})
+
+@Injectable()
+export class MyErrorHandler implements ErrorHandler {
+  ionicErrorHandler: IonicErrorHandler;
+
+  constructor(injector: Injector) {
+    try {
+      this.ionicErrorHandler = injector.get(IonicErrorHandler);
+    } catch(e) {
+      // Unable to get the IonicErrorHandler provider, ensure
+      // IonicErrorHandler has been added to the providers list below
+    }
+  }
+
+  handleError(err: any): void {
+    Pro.monitoring.handleNewError(err);
+    // Remove this if you want to disable Ionic's auto exception handling
+    // in development mode.
+    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+  }
+}
+
 enableProdMode();
 @NgModule({
   declarations: [
@@ -206,7 +235,9 @@ enableProdMode();
   WishlistService,
   //WalletService,
   ImgcacheService,
-  BlogService
+  BlogService,
+  IonicErrorHandler,
+  [{ provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })
 export class AppModule {}

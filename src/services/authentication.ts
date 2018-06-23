@@ -256,8 +256,8 @@ export class AuthenticationService {
         //let env = this;
         let params = [];
 
-        
-        return Observable.fromPromise(this.fb.login(permissions).then(
+        return Observable.of([]);
+        /*return Observable.fromPromise(this.fb.login(permissions).then(
             res=>{
                 return Observable.fromPromise(this.fb.api("/me?fields=name,email,gender", params)
                 .then(function(user) {
@@ -273,7 +273,7 @@ export class AuthenticationService {
                     
                 }));
             }
-        ));    
+        ));    */
     }
 
     public googleLogin(): Observable<any>{
