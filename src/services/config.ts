@@ -156,7 +156,10 @@ export class ConfigService{
 		this.unread_notifications_count=0;
 
 		this.translations = {
-			'home_title':'HOME PAGE',
+			'Available Courses': 'Available Courses',
+			'Continue your 7 Week Challenge': 'Continue your 7 Week Challenge',
+
+			'home_title':'Learning Journey',
 			'home_subtitle':'Featured Items',
 			'start_course': 'Start',
 			'search_title':'Searching..',

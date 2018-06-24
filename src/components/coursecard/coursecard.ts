@@ -11,11 +11,13 @@ export class Coursecard implements OnInit{
 
     coursePage= CoursePage;
     active:string='';
-    @Input('course') course;
+	@Input('course') course;
+	url_image: string =  '';
 
     constructor(
     	private wishlistService:WishlistService,private config:ConfigService) {
-    }
+			this.url_image = config.settings.url;
+		}
 
     ngOnInit(){
     	if(this.wishlistService.checkInWishList(this.course)){

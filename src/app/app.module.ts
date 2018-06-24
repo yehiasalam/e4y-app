@@ -105,7 +105,7 @@ import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 
 Pro.init('703b839f', {
-  appVersion: '1.0'
+  appVersion: '1.0.0'
 })
 
 @Injectable()

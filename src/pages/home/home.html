@@ -5,7 +5,7 @@
                 <ion-icon name="md-menu"></ion-icon>
             </button>
         </ion-buttons> 
-        <ion-title>{{config.get_translation('home_title')}}<span [innerHtml]="config.get_translation('home_subtitle')"></span></ion-title>
+        <ion-title>{{config.get_translation('home_title')}}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="openSearch()">
                 <ion-icon name="md-search"></ion-icon>
@@ -46,7 +46,7 @@
         </ion-slides>
         </div>
         <div *ngIf="popular.length && config.homePage.popular">
-            <h3 class="heading"><a [navPush]="categoryPage" [navParams]="{sortby:'popular'}"> <ion-icon ios="ios-more" md="md-more"></ion-icon></a><span>{{config.get_translation('popular_courses_title_home_page')}}</span><span>{{config.get_translation('popular_courses_subtitle_home_page')}}</span></h3>
+            <h3 class="heading"><a [navPush]="categoryPage" [navParams]="{sortby:'popular'}"> <ion-icon ios="ios-more" md="md-more"></ion-icon></a><span>{{config.get_translation('Available Courses')}}</span><span>{{config.get_translation('Continue your 7 Week Challenge')}}</span></h3>
             <div id="popular_courses">
                 <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" spaceBetween="0" slidesPerView="2" >
                     <ion-slide *ngFor="let lcourse of popular">
@@ -55,15 +55,6 @@
                 </ion-slides>
             </div>
         </div>
-        <div *ngIf="featured.length && config.homePage.featured">
-            <h3 class="heading"><span>{{config.get_translation('featured_courses')}}</span><span>{{config.get_translation('selected_courses')}}</span></h3>
-            <div id="popular_courses">
-                <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" spaceBetween="0" slidesPerView="2" >
-                    <ion-slide *ngFor="let lcourse of featured">
-                        <coursecard [course]="lcourse"></coursecard>
-                    </ion-slide>
-                </ion-slides>
-            </div>
-        </div>
+
     </div>        
 </ion-content>
