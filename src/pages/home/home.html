@@ -7,11 +7,6 @@
         </ion-buttons> 
         <ion-title>{{config.get_translation('home_title')}}</ion-title>
         <ion-buttons end>
-            <button ion-button (click)="openSearch()">
-                <ion-icon name="md-search"></ion-icon>
-            </button>
-        </ion-buttons>
-        <ion-buttons end>
             <button ion-button [navPush]="profilePage">
                 <ion-icon name="md-contact" *ngIf="!config.isLoggedIn"></ion-icon>
                 <img *ngIf="config.isLoggedIn" [src]="config.user?.avatar">
@@ -20,6 +15,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content elastic-header fixedscrollheader>
+
     <div id="featured" *ngIf="featured && featured.length && config.homePage.featuredCourseSlider">
         <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" spaceBetween="0">
             <ion-slide *ngFor="let course of featured">
@@ -28,33 +24,24 @@
             </ion-slide>
         </ion-slides>
     </div>
+
     <div id="homecontent" padding>
-        <div *ngIf="categories.length && config.homePage.categories">
-        <h3 class="heading"><a [navPush]="categoryPage"><ion-icon ios="ios-more" md="md-more"></ion-icon></a><span>{{config.get_translation('categories_title_home_page')}}</span><span>{{config.get_translation('categories_subtitle_home_page')}}</span></h3>
-        <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" id="categories" spaceBetween="0" slidesPerView="3">
-            <ion-slide *ngFor="let category of categories">
-                <ion-card [navPush]="categoryPage" [navParams]="category">
-                    <div class="featured_category_block">
-                        <lazy-img [inputSrc]="category.image"></lazy-img>
-                        <div class="category-content">
-                            <div class="category-title">{{category.name}}</div>
-                            <div class="category-subtitle">{{category.count}} Courses</div>
-                        </div>
-                    </div>
-                  </ion-card>
-            </ion-slide>
-        </ion-slides>
-        </div>
         <div *ngIf="popular.length && config.homePage.popular">
-            <h3 class="heading"><a [navPush]="categoryPage" [navParams]="{sortby:'popular'}"> <ion-icon ios="ios-more" md="md-more"></ion-icon></a><span>{{config.get_translation('Available Courses')}}</span><span>{{config.get_translation('Continue your 7 Week Challenge')}}</span></h3>
+            <h3 class="heading"><span>{{config.get_translation('Available Courses')}}</span><span>{{config.get_translation('Continue your 7 Week Challenge')}}</span></h3>
             <div id="popular_courses">
-                <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" spaceBetween="0" slidesPerView="2" >
-                    <ion-slide *ngFor="let lcourse of popular">
-                        <coursecard [course]="lcourse"></coursecard>
-                    </ion-slide>
-                </ion-slides>
+
+                <ion-grid>
+                    <ion-row *ngFor="let row of grid">
+                        <ion-col width-50 *ngFor="let lcourse of row">
+                        <coursecard [course]="lcourse" *ngIf="lcourse"></coursecard>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>        
+
             </div>
         </div>
+    </div>    
+    
 
-    </div>        
+
 </ion-content>

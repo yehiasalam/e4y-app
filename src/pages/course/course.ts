@@ -41,6 +41,7 @@ export class CoursePage implements OnInit{
     myCoursestatus:number=0;
     coursetabs: string[]=[];
     courseStatusPage = CourseStatusPage;
+    url_image: string =  '';
 
     @ViewChild('CourseTabs') courseTabs: Slides;
     @ViewChild('CourseSlides') courseSlides: Slides;
@@ -61,7 +62,9 @@ export class CoursePage implements OnInit{
       private loadingCtrl:LoadingController,
       private iab:InAppBrowser,
       //private walletService: WalletService,
-      private alertCtrl: AlertController){}
+      private alertCtrl: AlertController){
+        this.url_image = config.settings.url;
+      }
 
       ngOnInit(){      
         
@@ -101,7 +104,7 @@ export class CoursePage implements OnInit{
               }
               loading.dismiss();
               for(var k in this.fullCourse){
-                  if(k != 'course' && k != 'purchase_link'){this.coursetabs.push(k);}
+                  if(k != 'course' && k != 'purchase_link' && k != 'instructors'){this.coursetabs.push(k);}
               }
           });
 

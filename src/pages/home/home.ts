@@ -42,7 +42,8 @@ export class HomePage implements OnInit{
 	categoryPage = DirectoryPage;
 	profilePage=ProfilePage;
 	coursePage= CoursePage;
-	
+	grid: Array<Array<Course>> = [];
+
 	constructor(public navCtrl: NavController,
 		private courseService: CourseService, 
 		private modalCtrl: ModalController,
@@ -82,6 +83,7 @@ export class HomePage implements OnInit{
 			this.courseService.getPopularCourses().subscribe(popular =>{
 				if(popular){
 					this.popular = popular;
+					this.fill_grid(popular);
 				}
 				loading.dismiss();
 			});
@@ -94,6 +96,19 @@ export class HomePage implements OnInit{
 			
 		});
     	this.wishlistService.getWishList();
+	}
+
+	fill_grid(courses: any){
+		let rowNum = 0; //counter to iterate over the rows in the grid
+
+		for (let i = 0; i < courses.length; i+=2) { //iterate courses
+	  
+			this.grid[rowNum] = Array(2); //declare two elements per row  
+			if (courses[i]) this.grid[rowNum][0] = courses[i]; //insert image
+			if (courses[i+1]) this.grid[rowNum][1] = courses[i+1];
+
+			rowNum++; //go on to the next row
+		}
 	}
 
 	openSearch(){
