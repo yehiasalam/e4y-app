@@ -19,7 +19,7 @@
             <ion-buttons end>
                 <button ion-button [navPush]="profilePage" [navParams]="userdata">
                     <ion-icon name="md-contact" *ngIf="!user"></ion-icon>
-                    <img *ngIf="user" [src]="user?.avatar">
+                    <img *ngIf="user" [src]="config.settings.url + user?.avatar">
                 </button>
             </ion-buttons>
     </ion-navbar>

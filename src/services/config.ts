@@ -61,24 +61,24 @@ export class ConfigService{
 			'version':1,
 			//'url':'http://localhost/wplms/',
 			//'client_id':'X8bmmV0UE1AvZbnS7Rl7pCU',
-			'url':'http://e4y.azurewebsites.net/',
-			'client_id':'kM6ySacOjBBHn1TVYb7kSja',
+			'url':'http://e4ytest.azurewebsites.net/',
+			'client_id':'xnb7kqiywbVWPfrBMoM3gc3',
 			'client_secret':'', //Fetched from API call
 			'state':'', // FETCHED from Site
 			'access_token':'', // FETCHED on Login 
 			'registration':'app',//'app' or 'site' or false
 			'login':'app',//Select from 'app' or 'site' or false
 			'facebook':{
-				'enable':true,
+				'enable':false,
 				'app_id':491338181212175
 			},
 			'google':{
-				'enable':true,
+				'enable':false,
 			},
-			'per_view':5,
+			'per_view':10,
 			'force_mark_all_questions':false,
-			'wallet':true,					// <<----------REQUIRES WPLMS version 3.4
-			'inappbrowser_purchases':true, // <<----------REQUIRES WPLMS version 3.4
+			'wallet':false,					// <<----------REQUIRES WPLMS version 3.4
+			'inappbrowser_purchases':false, // <<----------REQUIRES WPLMS version 3.4
 			'rtl':false,
 		};
 

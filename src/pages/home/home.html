@@ -9,7 +9,7 @@
         <ion-buttons end>
             <button ion-button [navPush]="profilePage">
                 <ion-icon name="md-contact" *ngIf="!config.isLoggedIn"></ion-icon>
-                <img *ngIf="config.isLoggedIn" [src]="config.user?.avatar">
+                <img *ngIf="config.isLoggedIn" [src]="config.settings.url + config.user?.avatar">
             </button>
         </ion-buttons>
     </ion-navbar>

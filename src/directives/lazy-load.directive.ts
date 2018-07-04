@@ -40,13 +40,15 @@ export class LazyLoadDirective implements OnInit, OnDestroy {
       nativeElement.remove();
     });
 
+    // set the image without cachine
+    render.setAttribute(nativeElement, 'src', this.src);
     // cache img and set the src to the img
-    this.imgCacheService.cacheImg(this.src).then((value) => {
+    /*this.imgCacheService.cacheImg(this.src).then((value) => {
       if(value){
         render.setAttribute(nativeElement, 'src', value);
       }
       
-    });
+    });*/
   }
 
   ngOnDestroy() {

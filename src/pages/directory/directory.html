@@ -5,7 +5,7 @@
                 <ion-icon name="md-menu"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>{{title}}<span *ngIf="subtitle != 'false'">{{subtitle}}</span></ion-title>
+        <ion-title>{{title}}</ion-title>
             <ion-buttons end>
                 <button ion-button (click)="openSearch()">
                     <ion-icon name="md-search"></ion-icon>
@@ -14,7 +14,7 @@
             <ion-buttons end>
                 <button ion-button [navPush]="profilePage" [navParams]="userdata">
                     <ion-icon name="md-contact" *ngIf="!config.isLoggedIn"></ion-icon>
-                    <img *ngIf="config.isLoggedIn" [src]="config.user?.avatar">
+                    <img *ngIf="config.isLoggedIn" [src]="config.settings.url + config.user?.avatar">
                 </button>
             </ion-buttons>
     </ion-navbar>
