@@ -276,7 +276,7 @@ export class CoursePage implements OnInit{
         this.coursePriceSelected.push(pricing);
 
         //FREE COURSE
-        if(this.config.isLoggedIn && this.fullCourse.course.price == 0){
+        if(this.config.isLoggedIn && this.fullCourse.course.price === 0){
             console.log('YAY !')
             this.storage.remove('courses_'+this.config.user.id);
             this.storage.remove('fullcourse_'+this.course.id);

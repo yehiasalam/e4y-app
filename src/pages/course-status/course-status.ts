@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { NavController, NavParams, ModalController,LoadingController, AlertController,Platform, Slides,ToastController } from 'ionic-angular';
+import { Content,NavController, NavParams, ModalController,LoadingController, AlertController,Platform, Slides,ToastController } from 'ionic-angular';
 import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -46,6 +46,7 @@ export class CourseStatusPage implements OnInit{
   coursestatus:CourseStatus;
   course:any;
   user: any;
+  browser: any;
   saving:boolean=false;
   current_i:number;
   quiz_start:boolean;
@@ -58,8 +59,8 @@ export class CourseStatusPage implements OnInit{
   api:VgAPI;
 
   @ViewChild('CourseStatusItems') courseStatusItems: Slides;
-    @ViewChild('QuizQuestions') quizQuestions: Slides;
-    
+  @ViewChild('QuizQuestions') quizQuestions: Slides;
+  @ViewChild(Content) content: Content;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
         private modalCtrl: ModalController,private alert:AlertController,
@@ -276,6 +277,8 @@ export class CourseStatusPage implements OnInit{
 
     onSlideChanged(){
       let index = this.courseStatusItems.getActiveIndex();
+      this.content.scrollToTop();
+
         if(this.coursestatus.courseitems.length > index){
             this.current_i      = index;
 
@@ -393,6 +396,7 @@ export class CourseStatusPage implements OnInit{
 
     onQuestionSlide(){
         let index = this.courseStatusItems.getActiveIndex();
+        this.content.scrollToTop();
     }
 
 
@@ -461,6 +465,7 @@ export class CourseStatusPage implements OnInit{
       this.activityService.addActivity(a);
 
       //Stop timer
+      this.quizService.stopTimer(this.coursestatus.courseitems[this.current_i].id);
       this.quizService.removeQuizStarted(this.coursestatus.courseitems[this.current_i].id);
       
 
@@ -511,6 +516,7 @@ export class CourseStatusPage implements OnInit{
     selectedItem(i:number){
       this.timelineactive = 0;
       this.courseStatusItems.slideTo(i, 500);
+      this.content.scrollToTop();
     }
 
     QuestionChecked(question:any,index:number){
@@ -573,7 +579,7 @@ export class CourseStatusPage implements OnInit{
             this.config.removeFromTracker('statusitems',this.coursestatus.courseitems[index].id);
             this.courseStatusService.getCourseStatusItem(this.coursestatus,index).subscribe(res=>{
               this.coursestatus = res;
-              
+              this.quizService.removeQuizStarted(this.coursestatus.courseitems[index].id);
               this.checkQuizStatus();
               this.get_progress();
               if(loading){
@@ -581,7 +587,7 @@ export class CourseStatusPage implements OnInit{
               }
 
             });
-            this.quizService.removeQuizStarted(this.coursestatus.courseitems[index].id);
+            
             console.log('fetch quiz all again ');
             /*this.selectedItem(index);*/
             
@@ -711,5 +717,17 @@ export class CourseStatusPage implements OnInit{
 
     openIab(frameUrl){
       this.iab.create(frameUrl, "_blank");
+    }
+
+    openIabunit(frameUrl){
+      if(this.config.settings.units_in_inappbrowser){
+        this.browser = this.iab.create(frameUrl+'&access_token='+encodeURIComponent(this.config.settings.access_token), "_blank","location=no");
+        this.browser.insertCSS({ code: "header,footer{display:none;}" });
+
+        this.browser.show();
+        this.browser.on('exit').subscribe((event) => {
+          this.browser.close();
+        });
+      }
     }
 }

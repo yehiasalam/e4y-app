@@ -95,17 +95,12 @@ export class UserService{
     public getProfile(user_id){
 
         let loadedprofile = this.config.trackComponents('profile');
-
         if(loadedprofile){
-            if(this.profile){
-                return Observable.of(this.profile);
-            }else{
-                return Observable.fromPromise(this.storage.get('profile').then((profile) => {
-                    
-                    this.profile=profile;
-                    return this.profile;
-                }));
-            }
+            return Observable.fromPromise(this.storage.get('profile').then((profile) => {
+                
+                this.profile=profile;
+                return this.profile;
+            }));
         }else{
             let opt = this.auth.getUserAuthorizationHeaders();
             this.observable =  this.http.get(`${this.baseUrl}user/profile`,opt)
@@ -264,29 +259,25 @@ export class UserService{
                 }));
             }
         }else{
-            if(this.observable) {
-                console.log('request pending');
-                return this.observable;
-            }else{
+           
 
-                this.observable =  this.http.get(`${this.baseUrl}instructors/`)
-                    .map(response =>{
-                        this.observable = null;                    
-                        if(response.status == 400) {
-                          return "FAILURE";
-                        } else if(response.status == 200) {
-                            let body = response.json();
-                            if(body){ 
-                                this.instructors = body;
-                                this.storage.set('instructors',this.instructors);
-                                this.config.updateComponents('allinstructors',this.instructors.length);
-                                return body;
-                            }
+            this.observable =  this.http.get(`${this.baseUrl}instructors/`)
+                .map(response =>{
+                    this.observable = null;                    
+                    if(response.status == 400) {
+                      return "FAILURE";
+                    } else if(response.status == 200) {
+                        let body = response.json();
+                        if(body){ 
+                            this.instructors = body;
+                            this.storage.set('instructors',this.instructors);
+                            this.config.updateComponents('allinstructors',this.instructors.length);
+                            return body;
                         }
-                    });
+                    }
+                });
 
-                return this.observable;    
-            }
+            return this.observable;    
         }
     }
 
@@ -321,6 +312,7 @@ export class UserService{
                             console.log(body);
                             if(body){ 
                                 this.instructor[instructor_id] = body;
+                                this.storage.set('instructor_'+instructor_id,this.instructor[instructor_id]);
                                 this.config.addToTracker('instructors',instructor_id);
                                 return body;
                             }

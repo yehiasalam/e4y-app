@@ -1,9 +1,4 @@
 <ion-header center class="{{user ? 'loggedin': 'non-loggedin'}}">
-	<ion-buttons start>
-        <button ion-button menuToggle>
-            <ion-icon name="md-menu"></ion-icon>
-        </button>
-    </ion-buttons>
     <ion-title *ngIf="!isLoggedIn"><h1>{{config.get_translation('login_heading')}}</h1></ion-title>
     <ion-title *ngIf="isLoggedIn">
     	<div class="user_intro" avatarscrollzoomout>

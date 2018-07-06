@@ -41,7 +41,7 @@ export class CourseService implements OnInit{
     private locobservable: Observable<any>; //Tracks request in progress
 
     private levobservable: Observable<any>; //Tracks request in progress
-
+    private pmprochecklevelobservable:Observable<any>;
 	private baseUrl:string;
 
     constructor(private http:Http,
@@ -293,111 +293,105 @@ export class CourseService implements OnInit{
             }
 
         }else{
-            
-            if(this.fullcourseobservable && !force) {
-                return this.fullcourseobservable;
+            let k = 0;
+            if(this.fullCourses){
+                let k = this.fullCourses.length;
+            }
+            let fullCourse = <FullCourse>{};
+            if(this.config.isLoggedIn){
+                let opt = this.auth.getUserAuthorizationHeaders();
+                this.fullcourseobservable =  this.http.get(`${this.baseUrl}course/`+course.id,opt).map(response =>{
+
+                    this.fullcourseobservable = null;
+
+                    if(response.status == 400) {
+                      return "FAILURE";
+                    } else if(response.status == 200) {
+
+                        let body = response.json();
+                        if(body){
+                            let res = [];
+                            for(let i=0;i<body.length;i++){
+                                res.push(body[i].data);
+                            }    
+                            if(res){
+                                console.log(res[0]);
+                                fullCourse = res[0];
+                                console.log('############');
+                                /*
+                                Object.keys(res[0]).forEach(function (key) {
+                                    if(key == 'course'){
+                                        fullCourse['course'] = body[key];
+                                    }else if(key == 'curriculum'){
+                                        fullCourse['curriculum']=body[key];
+                                    }else if(key == 'description'){
+                                        fullCourse['description']=body[key];
+                                    }else if(key == 'reviews'){
+                                        fullCourse['reviews']=body[key];
+                                    }else if(key == 'purchase_link'){
+                                        fullCourse['purchase_link']=body[key];
+                                    }else if(key == 'instructors'){
+                                        fullCourse['instructors']=body[key];
+                                    }
+                                });*/
+                                console.log('setting full course in storage');
+                                this.storage.set('fullcourse_'+course.id,fullCourse);
+                                this.config.addToTracker('courses',course.id);
+                                this.fullCourses.push(fullCourse);
+                                return fullCourse;
+                            }
+                        }
+                    }
+                    
+                });
             }else{
-                let k = 0;
-                if(this.fullCourses){
-                    let k = this.fullCourses.length;
-                }
-                let fullCourse = <FullCourse>{};
-                if(this.config.isLoggedIn){
-                    let opt = this.auth.getUserAuthorizationHeaders();
-                    this.fullcourseobservable =  this.http.get(`${this.baseUrl}course/`+course.id,opt).map(response =>{
+                this.fullcourseobservable =  this.http.get(`${this.baseUrl}course/`+course.id)
+                .map(response =>{
 
-                        this.fullcourseobservable = null;
+                    this.fullcourseobservable = null;
 
-                        if(response.status == 400) {
-                          return "FAILURE";
-                        } else if(response.status == 200) {
+                    if(response.status == 400) {
+                      return "FAILURE";
+                    } else if(response.status == 200) {
 
-                            let body = response.json();
-                            if(body){
-                                let res = [];
-                                for(let i=0;i<body.length;i++){
-                                    res.push(body[i].data);
-                                }    
-                                if(res){
-                                    console.log(res[0]);
-                                    fullCourse = res[0];
-                                    console.log('############');
-                                    /*
-                                    Object.keys(res[0]).forEach(function (key) {
-                                        if(key == 'course'){
-                                            fullCourse['course'] = body[key];
-                                        }else if(key == 'curriculum'){
-                                            fullCourse['curriculum']=body[key];
-                                        }else if(key == 'description'){
-                                            fullCourse['description']=body[key];
-                                        }else if(key == 'reviews'){
-                                            fullCourse['reviews']=body[key];
-                                        }else if(key == 'purchase_link'){
-                                            fullCourse['purchase_link']=body[key];
-                                        }else if(key == 'instructors'){
-                                            fullCourse['instructors']=body[key];
-                                        }
-                                    });*/
-                                    console.log('setting full course in storage');
-                                    this.storage.set('fullcourse_'+course.id,fullCourse);
-                                    this.config.addToTracker('courses',course.id);
-                                    this.fullCourses.push(fullCourse);
-                                    return fullCourse;
-                                }
+                        let body = response.json();
+                        if(body){
+                            let res = [];
+                            for(let i=0;i<body.length;i++){
+                                res.push(body[i].data);
+                            }    
+                            if(res){
+                                console.log(res[0]);
+                                fullCourse = res[0];
+                                console.log('############');
+                                /*
+                                Object.keys(res[0]).forEach(function (key) {
+                                    if(key == 'course'){
+                                        fullCourse['course'] = body[key];
+                                    }else if(key == 'curriculum'){
+                                        fullCourse['curriculum']=body[key];
+                                    }else if(key == 'description'){
+                                        fullCourse['description']=body[key];
+                                    }else if(key == 'reviews'){
+                                        fullCourse['reviews']=body[key];
+                                    }else if(key == 'purchase_link'){
+                                        fullCourse['purchase_link']=body[key];
+                                    }else if(key == 'instructors'){
+                                        fullCourse['instructors']=body[key];
+                                    }
+                                });*/
+                                console.log('setting full course in storage');
+                                this.storage.set('fullcourse_'+course.id,fullCourse);
+                                this.config.addToTracker('courses',course.id);
+                                this.fullCourses.push(fullCourse);
+                                return fullCourse;
                             }
                         }
-                        
-                    });
-                }else{
-                    this.fullcourseobservable =  this.http.get(`${this.baseUrl}course/`+course.id)
-                    .map(response =>{
-
-                        this.fullcourseobservable = null;
-
-                        if(response.status == 400) {
-                          return "FAILURE";
-                        } else if(response.status == 200) {
-
-                            let body = response.json();
-                            if(body){
-                                let res = [];
-                                for(let i=0;i<body.length;i++){
-                                    res.push(body[i].data);
-                                }    
-                                if(res){
-                                    console.log(res[0]);
-                                    fullCourse = res[0];
-                                    console.log('############');
-                                    /*
-                                    Object.keys(res[0]).forEach(function (key) {
-                                        if(key == 'course'){
-                                            fullCourse['course'] = body[key];
-                                        }else if(key == 'curriculum'){
-                                            fullCourse['curriculum']=body[key];
-                                        }else if(key == 'description'){
-                                            fullCourse['description']=body[key];
-                                        }else if(key == 'reviews'){
-                                            fullCourse['reviews']=body[key];
-                                        }else if(key == 'purchase_link'){
-                                            fullCourse['purchase_link']=body[key];
-                                        }else if(key == 'instructors'){
-                                            fullCourse['instructors']=body[key];
-                                        }
-                                    });*/
-                                    console.log('setting full course in storage');
-                                    this.storage.set('fullcourse_'+course.id,fullCourse);
-                                    this.config.addToTracker('courses',course.id);
-                                    this.fullCourses.push(fullCourse);
-                                    return fullCourse;
-                                }
-                            }
-                        }
-                        
-                    });
-                }
+                    }
+                    
+                });
             }
         }
-
 
         return this.fullcourseobservable;
     }
@@ -408,7 +402,7 @@ export class CourseService implements OnInit{
 
     getPopularCourses(){
         
-        if(this.config.trackComponents('popular')){
+        if(this.config.trackComponents('popular')  && this.config.trackComponents('popular') == this.popular.length){
             if(this.popular.length){
                 return Observable.of(this.popular);
             }else{
@@ -447,7 +441,7 @@ export class CourseService implements OnInit{
     getFeaturedCourses(){
         
         console.log('Shall track featured = '+this.config.trackComponents('featured'));
-        if(this.config.trackComponents('featured')){
+        if(this.config.trackComponents('featured')  && this.config.trackComponents('featured') == this.featured.length){
             
             if(this.featured.length){
                 return Observable.of(this.featured);
@@ -591,6 +585,27 @@ export class CourseService implements OnInit{
             }
         }
         return catsA;
+    }
+
+    //for pmpro call"
+    checkAndAssignPmproLevel(pricing,fullcourse){
+        
+        let opt = this.auth.getUserAuthorizationHeaders();
+        return this.pmprochecklevelobservable =  this.http.get(`${this.baseUrl}user/course/pmprochecklevel/`+fullcourse.course.id+`/level/`+pricing.id,opt).map(response =>{
+
+            this.pmprochecklevelobservable = null;
+
+            if(response.status == 400) {
+              return "FAILURE";
+            } else if(response.status == 200) {
+
+                let body = response.json();
+                if(body){
+                    return body;
+                }
+            }
+        });
+
     }
 }
 

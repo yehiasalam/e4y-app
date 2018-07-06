@@ -21,6 +21,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { InAppPurchase } from '@ionic-native/in-app-purchase';
 import { Camera } from '@ionic-native/camera';
 import { Device } from '@ionic-native/device';
+import { File } from '@ionic-native/file';
 //import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 //import { Facebook } from '@ionic-native/facebook';
@@ -46,6 +47,10 @@ import { ReviewCoursePage } from '../pages/reviewcourse/reviewcourse';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { ProfilePage } from '../pages/profile/profile';
+
+import { RegisterPage } from '../pages/register/register';
+import { LoginPage } from '../pages/login/login';
+
 import { SearchPage } from '../pages/search/search';
 import { DirectoryPage } from '../pages/directory/directory';
 import { InstructorsPage } from '../pages/instructors/instructors';
@@ -141,6 +146,8 @@ enableProdMode();
     HomePage,
     TabsPage,
     ProfilePage,
+    LoginPage,
+    RegisterPage,
     SearchPage,
     DirectoryPage,
     InstructorsPage,
@@ -198,6 +205,8 @@ enableProdMode();
     HomePage,
     TabsPage,
     ProfilePage,
+    LoginPage,
+    RegisterPage,
     DirectoryPage,
     InstructorsPage,
     InstructorPage,
@@ -220,6 +229,7 @@ enableProdMode();
   //InAppPurchase,
   Camera,
   Device,
+  File,
   //Facebook,
   //GooglePlus,
   //Transfer,

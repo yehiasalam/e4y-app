@@ -49,7 +49,7 @@ export class MyApp implements OnInit {
                 this.splashScreen.hide();
                 if(result){
 
-                    imgcacheService.initImgCache().then(() => {
+                    imgcacheService.initImgCache().subscribe(() => {
                       this.rootPage = TabsPage;
                       this.loader.dismiss();
                     });
@@ -59,7 +59,7 @@ export class MyApp implements OnInit {
                     this.rootPage = Intro;
                     
                     let nav = this.app.getRootNav();
-                    imgcacheService.initImgCache().then(() => {
+                    imgcacheService.initImgCache().subscribe(() => {
                       nav.setRoot(this.rootPage);
                       this.loader.dismiss();
                     });

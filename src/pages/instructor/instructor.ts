@@ -24,8 +24,9 @@ export class InstructorPage implements OnInit{
 		'social':[],
 		'courses':[]
 	};
+  directoryPage=DirectoryPage;
 	coursePage:CoursePage;
-	directoryPage:DirectoryPage;
+	
 	@ViewChild('InstructorTabs') instructorTabs: Slides;
 	@ViewChild('InstructorSlides') instructorSlides: Slides;
   	constructor(

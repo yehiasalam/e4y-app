@@ -9,7 +9,7 @@
 <div class="question_content" *ngIf="question.type == 'select'">
 	<div *ngFor="let content of question.content; let i = index">
 		<div [innerHtml]="content"></div>
-		<ion-item><ion-select #ci (ionChange)="trackSelect($event,i)" *ngIf="i < (question.content.length-1)">
+		<ion-item><ion-select #ci (ionChange)="trackSelect($event,i)" *ngIf="i < (question.content.length-1)" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 		    <ion-option *ngFor="let option of question.options;let k=index" [value]="k">{{option}}</ion-option>
 		</ion-select></ion-item>
 	</div>

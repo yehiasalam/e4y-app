@@ -212,40 +212,32 @@ export class AuthenticationService {
     public getUser(){
         
         if(this.config.trackComponents('user')){
-            if(this.user){
-                return Observable.of(this.user);
-            }else{
+            
                 this.storage.get('user').then((user) => {
                     this.user = user;
                     return Observable.of(this.user);
                 });
-            }    
         }else{
-            if(this.observable) {
-                console.log('request pending');
-                return this.observable;
-            }else{
 
-                let opt = this.getUserAuthorizationHeaders();
+            let opt = this.getUserAuthorizationHeaders();
 
-                this.observable =  this.http.get(`${this.config.baseUrl}user/`,opt)
-                    .map(response =>{
-                        this.observable = null;                    
-                        if(response.status == 400) {
-                          return "FAILURE";
-                        } else if(response.status == 200) {
+            this.observable =  this.http.get(`${this.config.baseUrl}user/`,opt)
+                .map(response =>{
+                    this.observable = null;                    
+                    if(response.status == 400) {
+                      return "FAILURE";
+                    } else if(response.status == 200) {
 
-                            let body = response.json();
-                            console.log(body);
-                            if(body){ 
-                                this.user = body;
-                                this.config.updateComponents('user',this.user.id);
-                                this.storage.set('user',this.user);
-                                return body;
-                            }
+                        let body = response.json();
+                        console.log(body);
+                        if(body){ 
+                            this.user = body;
+                            this.config.updateComponents('user',this.user.id);
+                            this.storage.set('user',this.user);
+                            return body;
                         }
-                    }); 
-            }
+                    }
+                }); 
         }
         return this.observable;
     }
@@ -306,99 +298,101 @@ export class AuthenticationService {
         }));*/
     }
 
-    public logout(){
+    public logout(user){
+        if(user){
+            let opt = this.getUserAuthorizationHeaders();
+            let url = `${this.config.baseUrl}user/logout`;
+            this.http.post(url,{},opt).subscribe(res=>{
+
+            });
+            console.log(this.config.defaultTrack);
+            console.log('this.config.defaultTrack;');
+            console.log(this.config.track);
+            this.config.track = this.config.defaultTrack;
+        }
         //this.fb.logout();
         //this.googlePlus.logout();
     }
     
     public signinUser(form:any): Observable<any>{
 
-        console.log(form);
-        if(this.observable) {
-            console.log('User signin pending');
-            return this.observable;
-        }else{
-            form.client_id = this.client_id;
-            form.state = this.config.settings.state;
-            form.device = this.device.uuid;
-            form.platform = this.device.platform;
-            form.model = this.device.model;
+        
+        form.client_id = this.client_id;
+        form.state = this.config.settings.state;
+        form.device = this.device.uuid;
+        form.platform = this.device.platform;
+        form.model = this.device.model;
 
-            let headers = new Headers({
-                'Content-Type': 'application/json'
-            });
-            let options = new RequestOptions({
-                headers: headers
-            });
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
 
-            this.observable =  this.http.post(`${this.config.baseUrl}user/signin`,form,options)
-                .map(response =>{
-                    this.observable = null;    
-                    console.log('signinuser first response');
-                        console.log(response);
-                    if(response.status == 400) {
-                      return "FAILURE";
-                    } else if(response.status == 200) {
-                        console.log('signinuser response');
-                        console.log(response);
-                        let body = response.json();
-                        console.log('Attempting Signin');
-                        console.log(body);
-                        if(body.status){
-                            this.setAccessToken(body.token.access_token);
-                            this.setUser(body.user);
-                            this.config.track.counter--;
-                            this.config.getTracker();
-                        }
-
-                        return {'status':body.status,'message':body.message};
+        this.observable =  this.http.post(`${this.config.baseUrl}user/signin`,form,options)
+            .map(response =>{
+                this.observable = null;    
+                console.log('signinuser first response');
+                    console.log(response);
+                if(response.status == 400) {
+                  return "FAILURE";
+                } else if(response.status == 200) {
+                    console.log('signinuser response');
+                    console.log(response);
+                    let body = response.json();
+                    console.log('Attempting Signin');
+                    console.log(body);
+                    if(body.status){
+                        this.setAccessToken(body.token.access_token);
+                        this.setUser(body.user);
+                        this.config.track.counter--;
+                        //this.config.getTracker();
                     }
-                });
 
-            return this.observable;    
-        }
+                    return {'status':body.status,'message':body.message};
+                }
+            });
+
+        return this.observable;    
 
     }
 
     public registerUser(form:any): Observable<any>{
         console.log(form); 
-        if(this.observable) {
-            console.log('User registration pending');
-            return this.observable;
-        }else{
-            form.client_id = this.client_id;
-            form.state = this.config.settings.state;
-            form.device = this.device.uuid;
-            form.platform = this.device.platform+' ( '+this.device.version+') ';
-            form.model = this.device.model;
+        
+        form.client_id = this.client_id;
+        form.state = this.config.settings.state;
+        form.device = this.device.uuid;
+        form.platform = this.device.platform+' ( '+this.device.version+') ';
+        form.model = this.device.model;
 
-            let headers = new Headers({
-            'Content-Type': 'application/json'
-            });
-            let options = new RequestOptions({
-                headers: headers
-            });
+        let headers = new Headers({
+        'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
 
-            this.observable =  this.http.post(`${this.config.baseUrl}user/register`,form,options)
-                .map(response =>{
-                    this.observable = null;    
+        this.observable =  this.http.post(`${this.config.baseUrl}user/register`,form,options)
+            .map(response =>{
+                this.observable = null;    
 
-                    if(response.status == 400) {
-                      return "FAILURE";
-                    } else if(response.status == 200) {
+                if(response.status == 400) {
+                  return "FAILURE";
+                } else if(response.status == 200) {
 
-                        let body = response.json();
-                        if(body.status){
-                            this.setAccessToken(body.token.access_token);
-                            this.setUser(body.user);
-                        }
-
-                        return {'status':body.status,'message':body.message};
+                    let body = response.json();
+                    if(body.status){
+                        this.setAccessToken(body.token.access_token);
+                        this.setUser(body.user);
                     }
-                });
 
-            return this.observable;    
-        }
+                    return {'status':body.status,'message':body.message};
+                }
+            });
+
+        return this.observable;    
 
     }
 

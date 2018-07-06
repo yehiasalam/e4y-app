@@ -30,7 +30,7 @@
 			<ion-col>
 				<div class="filter_sort_select">
 					<ion-item>
-						<ion-select placeholder="{{this.config.get_translation('sort_options')}}" (ionChange)="onSortOptions($event)" [selectOptions]="sortSelectOptions" [(ngModel)]="sortby">
+						<ion-select placeholder="{{this.config.get_translation('sort_options')}}" (ionChange)="onSortOptions($event)" [selectOptions]="sortSelectOptions" [(ngModel)]="sortby" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 							<ion-option value="popular">{{this.config.get_translation('popular')}}</ion-option>
 							<ion-option value="recent">{{this.config.get_translation('recent')}}</ion-option>
 							<ion-option value="alphabetical">{{this.config.get_translation('alphabetical')}}</ion-option>
@@ -85,31 +85,31 @@
 	<ion-list>
 		<ion-item *ngIf="this.config.directoryFilters.categories">
 			<ion-label>{{this.config.get_translation('select_category')}}</ion-label>
-			<ion-select [(ngModel)]="selectedCategories"   multiple="true">
+			<ion-select [(ngModel)]="selectedCategories"   multiple="true" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				<ion-option *ngFor="let category of categories" [value]="category.term_id" [innerHtml]="category.name"></ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item *ngIf="this.config.directoryFilters.locations">
 			<ion-label>{{this.config.get_translation('select_location')}}</ion-label>
-			<ion-select [(ngModel)]="selectedLocations"   multiple="true">
+			<ion-select [(ngModel)]="selectedLocations"   multiple="true" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				<ion-option *ngFor="let category of locations" [value]="category.term_id" [innerHtml]="category.name"></ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item *ngIf="this.config.directoryFilters.levels">
 			<ion-label>{{this.config.get_translation('select_level')}}</ion-label>
-			<ion-select [(ngModel)]="selectedLevels"   multiple="true">
+			<ion-select [(ngModel)]="selectedLevels"   multiple="true" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				<ion-option *ngFor="let category of levels" [value]="category.term_id" [innerHtml]="category.name"></ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item *ngIf="this.config.directoryFilters.instructors">
 			<ion-label>{{this.config.get_translation('select_instructor')}}</ion-label>
-			<ion-select [(ngModel)]="selectedInstructors"  multiple="true">
+			<ion-select [(ngModel)]="selectedInstructors"  multiple="true" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				<ion-option *ngFor="let instructor of instructors" [value]="instructor.id" [innerHtml]="instructor.name"></ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item *ngIf="this.config.directoryFilters.free_paid">
 			<ion-label>{{this.config.get_translation('free_paid')}}</ion-label>
-			<ion-select [(ngModel)]="free_paid">
+			<ion-select [(ngModel)]="free_paid" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				<ion-option [value]="0" [innerHtml]="this.config.get_translation('all')"></ion-option>
 				<ion-option [value]="S" [innerHtml]="this.config.get_translation('all_free')"></ion-option>
 				<ion-option [value]="H" [innerHtml]="this.config.get_translation('all_paid')"></ion-option>
@@ -117,7 +117,7 @@
 		</ion-item>
 		<ion-item *ngIf="this.config.directoryFilters.online_offline">
 			<ion-label>{{this.config.get_translation('select_online_offline')}}</ion-label>
-			<ion-select [(ngModel)]="offline">
+			<ion-select [(ngModel)]="offline" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				<ion-option [value]="0" [innerHtml]="this.config.get_translation('all')"></ion-option>
 				<ion-option [value]="S" [innerHtml]="this.config.get_translation('offline')"></ion-option>
 				<ion-option [value]="H" [innerHtml]="this.config.get_translation('online')"></ion-option>

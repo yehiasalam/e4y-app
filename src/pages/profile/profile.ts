@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController,ViewController,LoadingController, ToastController,ActionSheetController,AlertController, NavParams, Slides,Platform } from 'ionic-angular';
+import { Content,NavController,ViewController,LoadingController, ToastController,ActionSheetController,AlertController, NavParams, Slides,Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup,FormControl, Validators, } from '@angular/forms';
 
 //import { InAppBrowser } from 'ionic-native';
@@ -14,6 +14,9 @@ import { ConfigService } from '../../services/config';
 
 import { User } from '../../models/user';
 import { Profile } from '../../models/user';
+import { LoginPage } from '../login/login';
+
+import { RegisterPage } from '../register/register';
 
 import { CourseStatusPage } from '../course-status/course-status';
 import { ResultPage } from '../result/result';
@@ -68,7 +71,7 @@ export class ProfilePage implements OnInit{
     };
     @ViewChild('ProfileTabs') profileTabs: Slides;
     @ViewChild('ProfileSlides') profileSlides: Slides;
-
+    @ViewChild(Content) content: Content;
     @ViewChild('barCanvas') barCanvas;
     @ViewChild('lineCanvas') lineCanvas;
  
@@ -123,10 +126,10 @@ export class ProfilePage implements OnInit{
 
             //this.profileTab = this.navParams.data.index;
             this.userService.getProfile(this.user).subscribe(res=>{
-                if(res){
-                    this.profile = res;  
-                    //this.profileSlides.slideTo(this.profileTab, 0);
-                }
+                
+                this.profile = res;  
+                //this.profileSlides.slideTo(this.profileTab, 0);
+                
             });
         }
     }
@@ -214,7 +217,7 @@ export class ProfilePage implements OnInit{
     showSignIn(){
         console.log(' ==>  '+this.config.settings.login );
         if(this.config.settings.login == 'app'){
-            this.signin = true;    
+            this.navCtrl.push(LoginPage);    
         }else{
             this.auth.signIn();
         }
@@ -432,9 +435,9 @@ export class ProfilePage implements OnInit{
                     if(res.status){  
                         env.userService.getUser();
                         toast.onDidDismiss(() => {
-                            if(env.navCtrl){
+                            /*if(env.navCtrl){
                                 env.navCtrl.setRoot(TabsPage);
-                            }
+                            }*/
                         });
                     }
                     
@@ -495,7 +498,7 @@ export class ProfilePage implements OnInit{
     enableRegister(){
 
         if(this.config.settings.registration == 'app'){
-            this.register = true;   
+            this.navCtrl.push(RegisterPage); 
         }else{
             this.auth.openRegistration();
         }
@@ -517,9 +520,10 @@ export class ProfilePage implements OnInit{
     }
 
     onSlideChanged(){
+
         let index = this.profileSlides.getActiveIndex();
         this.profileTabs.slideTo(index,500);
-
+        this.content.scrollToTop();
         let key = this.profile.tabs[index].key;
         this.currentTab = key;
         //if(!this.profile.data.hasOwnProperty(key)){
@@ -546,10 +550,10 @@ export class ProfilePage implements OnInit{
                        res.map(item => {
                             item.show = 1;
                         });
-                        this.profile.data['courses']=res; 
+                        
                     }
                 }
-                //this.profile.data[key] = res;  
+                this.profile.data[key] = res;  
             });
         //}
     }
@@ -721,7 +725,9 @@ export class ProfilePage implements OnInit{
     }
     logout(){
         this.storage.clear();
-        this.auth.logout();
+
+        this.auth.logout(this.user);
+
     }
 
     doRefresh(refresher){

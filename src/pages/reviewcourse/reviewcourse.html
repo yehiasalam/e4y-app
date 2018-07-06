@@ -20,7 +20,7 @@
 			</ion-item>
 			<ion-item>
 				<ion-label floating>{{config.get_translation('review_rating')}}</ion-label>
-	    		<ion-select formControlName="rating">
+	    		<ion-select formControlName="rating" okText="{{config.get_translation('ok')}}" cancelText="{{config.get_translation('cancel')}}">
 				    <ion-option value="1">{{config.get_translation('rating1star')}}</ion-option>
 				    <ion-option value="2">{{config.get_translation('rating2star')}}</ion-option>
 				    <ion-option value="3">{{config.get_translation('rating3star')}}</ion-option>

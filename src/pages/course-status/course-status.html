@@ -98,6 +98,10 @@
                     </ion-grid>
                 </h3>
 
+                <div *ngIf="config.settings.units_in_inappbrowser && item.type == 'unit' && item.meta.link && item.meta.link.length">
+                    <button ion-button (click)="openIabunit(item.meta.link)" [innerHtml]="config.get_translation('open_in_new_window')"></button>
+                </div>
+
                 <div *ngIf="item.type == 'unit' && item.meta.video">
                     
                     <vg-player (onPlayerReady)="onPlayerReady($event)" *ngFor="let video of item.meta.video" vg-responsive="true">
@@ -122,12 +126,42 @@
                         </video>
                     </vg-player>
                 </div> 
+
+                <div *ngIf="item.type == 'unit' && item.meta.audio" class="audio-container">
+                    
+                <vg-player style="height: 50px;" (onPlayerReady)="onPlayerReady($event)" *ngFor="let audio of item.meta.audio" vg-responsive="true">
+                        <vg-controls [vgAutohide]="false">
+                            <vg-play-pause></vg-play-pause>
+                            <vg-playback-button></vg-playback-button>
+
+                            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                            <vg-scrub-bar>
+                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                            </vg-scrub-bar>
+
+                            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                            <vg-mute></vg-mute>
+
+                        </vg-controls>
+
+                        <audio #media [vgMedia]="media" id="myAudio" preload="auto">
+                            <source [src]="audio" type="audio/mp3">
+                        </audio>
+                    </vg-player>
+
+                   
+                </div> 
+
                 <div *ngIf="item.type == 'unit' && item.meta.iframes && item.meta.iframes.length">
                     <div class="course_item_iframe" *ngFor="let iframeUrl of item.meta.iframes">
                         <iframe width="100%" height="100%" [src]="iframeUrl | safeUrl" frameborder="0" allowfullscreen></iframe>
                         <button ion-button (click)="openIab(iframeUrl)" [innerHtml]="config.get_translation('open_in_new_window')"></button>
                     </div>
-                </div> 
+                </div>
+
+
                 <div id="maincontent" class="pinchzoom" *ngIf="item.type == 'unit'" [innerHtml]="item.content | safeHtml" padding></div>
                 <div *ngIf="!item.meta.access && item.type == 'unit'">
                     <button ion-button icon-only clear (click)="forceReload()"><ion-icon name="md-refresh"></ion-icon></button>

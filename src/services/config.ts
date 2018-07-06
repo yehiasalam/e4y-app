@@ -80,6 +80,7 @@ export class ConfigService{
 			'wallet':false,					// <<----------REQUIRES WPLMS version 3.4
 			'inappbrowser_purchases':false, // <<----------REQUIRES WPLMS version 3.4
 			'rtl':false,
+			'units_in_inappbrowser':false,
 		};
 
 		this.baseUrl = this.settings.url+'wp-json/wplms/v1/';

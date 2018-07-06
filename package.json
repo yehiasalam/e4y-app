@@ -25,6 +25,7 @@
     "@ionic-native/core": "4.7.0",
     "@ionic-native/device": "^4.8.0",
     "@ionic-native/facebook": "^4.8.0",
+    "@ionic-native/file": "^4.9.0",
     "@ionic-native/file-transfer": "^4.8.0",
     "@ionic-native/in-app-browser": "^4.8.0",
     "@ionic-native/in-app-purchase": "^4.8.0",

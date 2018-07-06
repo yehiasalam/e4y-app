@@ -52,24 +52,12 @@ export class CourseStatusService {
 
         console.log(status.course_id);
          if(typeof statuses != 'undefined' && statuses.length && statuses.indexOf(status.course_id) > -1){
-            
-
-            if(this.courseStatuses.length){
-
-                for(let i=0;i<this.courseStatuses.length;i++){
-                    if(this.courseStatuses[i].course_id == status.course_id && 
-                        this.courseStatuses[i].user_id == status.user_id ){
-                        return Observable.of(this.courseStatuses[i]); //return if already cached
-                    }
-                }
-            }else{
-                this.observable = Observable.fromPromise(this.storage.get('coursestatus_'+status.course_id+'_'+status.user_id).then(
-                    coursestatus=>{
-                        console.log(coursestatus);
-                    this.courseStatuses.push(coursestatus);
-                    return coursestatus;
-                }));
-            }
+            this.observable = Observable.fromPromise(this.storage.get('coursestatus_'+status.course_id+'_'+status.user_id).then(
+                coursestatus=>{
+                    console.log(coursestatus);
+                this.courseStatuses.push(coursestatus);
+                return coursestatus;
+            }));
         }else{ 
 
             let url = `${this.baseUrl}user/coursestatus/`+status.course_id;

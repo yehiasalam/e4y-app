@@ -1,60 +1,69 @@
-import { Directive,
-         ElementRef,
-         EventEmitter,
-         Input,
-         Output,
-         OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit, OnDestroy, Renderer2
+} from '@angular/core';
 
 import { ImgcacheService } from '../services/imageCache';
 
+import { Subscription } from 'rxjs/Subscription';
+
 /**
- * This directive is charge of cache the images and emit a loaded event
- */
+* This directive is charge of cache the images and emit a loaded event
+*/
 @Directive({
   selector: '[lazy-load]'
 })
 export class LazyLoadDirective implements OnInit, OnDestroy {
 
-  @Input('inputSrc') src ='';
-  @Output() loaded = new EventEmitter();
+  @Input('inputSrc')
+  public inputSrc: string = '';
 
-  public loadEvent: any;
-  public errorEvent: any;
+  @Output()
+  public loaded: EventEmitter<void> = new EventEmitter<void>();
+
+  public loadListener: () => void;
+  public errorListener: () => void;
+
+  private cacheSubscription: Subscription;
 
   constructor(public el: ElementRef,
-              public imgCacheService: ImgcacheService,
-              public renderer: Renderer2) {}
+    public imgCacheService: ImgcacheService,
+    public renderer: Renderer2) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     // get img element
-    const nativeElement = this.el.nativeElement;
-    const render = this.renderer;
-
+    const nativeElement: HTMLElement = this.el.nativeElement;
     // add load listener
-    this.loadEvent = render.listen(nativeElement, 'load', () => {
-      render.addClass(nativeElement, 'loaded');
+    this.loadListener = this.renderer.listen(nativeElement, 'load', () => {
+      this.renderer.addClass(nativeElement, 'loaded');
       this.loaded.emit();
     });
 
-    this.errorEvent = render.listen(nativeElement, 'error', () => {
+    this.errorListener = this.renderer.listen(nativeElement, 'error', () => {
       nativeElement.remove();
     });
 
-    // set the image without cachine
-    render.setAttribute(nativeElement, 'src', this.src);
     // cache img and set the src to the img
-    /*this.imgCacheService.cacheImg(this.src).then((value) => {
-      if(value){
-        render.setAttribute(nativeElement, 'src', value);
-      }
-      
-    });*/
+    
+    this.cacheSubscription =
+      this.imgCacheService
+          .cache(this.inputSrc)
+          .subscribe((value) => {
+            this.renderer.setAttribute(nativeElement, 'src', value);
+          }, (e) => console.log(e));
+          
+      //this.renderer.setAttribute(nativeElement, 'src', this.src);
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     // remove listeners
-    this.loadEvent();
-    this.errorEvent();
+    this.loadListener();
+    this.errorListener();
+    this.cacheSubscription.unsubscribe();
   }
 
 }

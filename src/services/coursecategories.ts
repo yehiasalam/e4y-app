@@ -55,48 +55,44 @@ export class CourseCategoryService {
             }
         }
 
-        if(this.observable) {
-            console.log('request pending');
-            return this.observable;
-        }else{
+       
 
-            let k = this.fullcategories.length;
+        let k = this.fullcategories.length;
 
-            this.observable = this.http.get(
-                `${this.baseUrl}course/category/`+cat.term_id)
-                .map(response => {
-                    
-                    this.observable = null;
+        this.observable = this.http.get(
+            `${this.baseUrl}course/category/`+cat.term_id)
+            .map(response => {
+                
+                this.observable = null;
 
-                    if(response.status == 400) {
-                      return "FAILURE";
-                    } else if(response.status == 200) {
+                if(response.status == 400) {
+                  return "FAILURE";
+                } else if(response.status == 200) {
 
-                        let categories = response.json();
+                    let categories = response.json();
 
-                        let courses:Course[]=[];
-                        for(let i=0;i<categories.courses.length;i++){
-                            courses.push(categories.courses[i].data);
-                        }
-
-                        let cats: CourseCategory[]=[];
-                        for(let i=0;i<categories.child.length;i++){
-                            cats.push(categories.child);
-                        }
-
-                        let full_category = {
-                            category: cat,
-                            childCategories: cats,    
-                            courses: courses,
-                        }
-                        
-                        this.fullcategories.push(full_category);
-                        return this.fullcategories[k];
+                    let courses:Course[]=[];
+                    for(let i=0;i<categories.courses.length;i++){
+                        courses.push(categories.courses[i].data);
                     }
-                });
 
-              return this.observable;
-        }
+                    let cats: CourseCategory[]=[];
+                    for(let i=0;i<categories.child.length;i++){
+                        cats.push(categories.child);
+                    }
+
+                    let full_category = {
+                        category: cat,
+                        childCategories: cats,    
+                        courses: courses,
+                    }
+                    
+                    this.fullcategories.push(full_category);
+                    return this.fullcategories[k];
+                }
+            });
+
+          return this.observable;
     } 
 
     mergeCategories(catsA: CourseCategory[],catsB: CourseCategory[]){
