@@ -105,6 +105,9 @@ import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 
+// Required for push notifications
+import { Push } from '@ionic-native/push';
+
 // These are all imports required for Pro Client with Monitoring & Deploy
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
@@ -234,6 +237,7 @@ enableProdMode();
   //GooglePlus,
   //Transfer,
   Storage,//PhotoViewer,
+  Push,
   ConfigService,
   AuthenticationService,
   UserService,

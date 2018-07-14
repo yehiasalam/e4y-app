@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config';
 import { CoursePage } from '../../pages/course/course';
 import { WishlistService } from '../../services/wishlist';
+import { isPresent } from 'ionic-angular/umd/util/util';
+import { AlertController, NavController } from 'ionic-angular';
 
 @Component({
   selector: 'coursecard',
@@ -15,8 +17,11 @@ export class Coursecard implements OnInit{
 	url_image: string =  '';
 
     constructor(
-    	private wishlistService:WishlistService,private config:ConfigService) {
-			this.url_image = config.settings.url;
+		private wishlistService:WishlistService,
+		private config:ConfigService,
+		public alertCtrl: AlertController,
+		public navCtrl: NavController) {
+			this.url_image = config.settings.url;		
 		}
 
     ngOnInit(){
@@ -25,7 +30,12 @@ export class Coursecard implements OnInit{
     		this.active = 'active';
     	}else{
     		this.active = '';
-    	}
+		}
+		
+		var now = (new Date).getTime() / 1000;
+		this.course.locked = ((this.course.start_date === false) || 
+							(this.course.start_date > now));
+
     }
 
     addToWishlist(){
@@ -37,7 +47,23 @@ export class Coursecard implements OnInit{
     		this.wishlistService.addToWishlist(this.course);
     		this.active='active';
     	}
-    }
+	}
+	
+	show_course( course ){
+
+		if (this.course.locked) {
+			let alert = this.alertCtrl.create({
+				title: 'Course Locked',
+				subTitle: 'This course hasn\'t started yet. Please check back later',
+				buttons: ['OK']
+			  });	
+	
+			  alert.present();
+		} else {
+			this.navCtrl.push(this.coursePage, course);	
+		}
+	}
+
 
 
 }

@@ -383,10 +383,11 @@ export class AuthenticationService {
                 } else if(response.status == 200) {
 
                     let body = response.json();
-                    if(body.status){
+                    // do nothing, user will need to be manually activated
+                    /*if(body.status){
                         this.setAccessToken(body.token.access_token);
                         this.setUser(body.user);
-                    }
+                    }*/
 
                     return {'status':body.status,'message':body.message};
                 }

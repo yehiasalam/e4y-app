@@ -5,6 +5,11 @@ coursecard {
 	width:100%;
 
 	.featured_course_block{
+
+		&.locked {
+			opacity: 0.4;
+		}
+
 		.featured_course_image{
 			max-height:200px;
 			overflow:hidden;
@@ -12,6 +17,7 @@ coursecard {
 		.card-content{
 			padding:10px 12px 11px 12px;
 			position:relative;
+			background: #f6f6f6;
 		}
 		.star-rating,
 		.card-title{
@@ -19,5 +25,22 @@ coursecard {
 			margin-top:0;padding-top:0;
 			font-weight:600;
 		}
+	
+		div.locked{
+			position: absolute;
+			right: 20px;
+			bottom: 15px;
+			font-size: 2rem;
+			z-index:99;
+			color: black;
+			&:before{
+				content:"\f31d";
+				font-family:"Ionicons";
+			}
+		}	
+	
+	
 	}
+
+
 }

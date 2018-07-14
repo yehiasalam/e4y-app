@@ -47,7 +47,8 @@ export class ImgcacheService {
    * @param src {string}
    */
   public cache(src: string): Observable<string> {
-    return this.notifier$.pipe(
+    return Observable.of(src);
+    /*return this.notifier$.pipe(
       switchMapTo(
         this.isCached(src)
           .pipe(
@@ -55,14 +56,14 @@ export class ImgcacheService {
               return success ? this.getCachedFileURL(path) : this.cacheFile(path);
             }),
             map((url: string) => {
-              if (this.platform.is('ios')) {
+              /*if (this.platform.is('ios')) {
                 return this.normalizeURlWKWview(url);
               }
               return url;
             })
           )
       )
-    );
+    );*/
   }
 
   /**
@@ -80,26 +81,26 @@ export class ImgcacheService {
    * Get file URL if cached
    * @param src - image url
    */
-  private getCachedFileURL(src: string): Observable<string> {
+  /*private getCachedFileURL(src: string): Observable<string> {
     return bindCallback<string, string[]>(ImgCache.getCachedFileURL)(src)
       .pipe(
         map((urls: string[]) => urls[1])
       );
-  }
+  }/*
 
   /**
    * Cache image using a url
    * @param src {string}
    */
-  private cacheFile(src: string): Observable<string> {
+  /*private cacheFile(src: string): Observable<string> {
     return bindCallback<string, string>(ImgCache.cacheFile)(src);
-  }
+  }*/
 
   /**
    * Check if image is already cached
    * @param src
    */
-  private isCached(src: string): Observable<[string, boolean]> {
+ /* private isCached(src: string): Observable<[string, boolean]> {
     return bindCallback<string, [string, boolean]>(ImgCache.isCached)(src);
-  }
+  }*/
 }

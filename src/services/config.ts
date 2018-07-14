@@ -159,6 +159,9 @@ export class ConfigService{
 		this.translations = {
 			'Available Courses': 'Available Courses',
 			'Continue your 7 Week Challenge': 'Continue your 7 Week Challenge',
+			
+			'register_thank_you': 'Thanks for your interest in joining the program. We will get back to you shortly by email with your approval status.',
+			'register_button_label': 'Join the Program',
 
 			'home_title':'Learning Journey',
 			'home_subtitle':'Featured Items',

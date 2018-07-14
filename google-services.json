@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "714054100116",
+    "firebase_url": "https://cheshme-creative-challenges.firebaseio.com",
+    "project_id": "cheshme-creative-challenges",
+    "storage_bucket": "cheshme-creative-challenges.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714054100116:android:4aec2a7e1c2144f3",
+        "android_client_info": {
+          "package_name": "com.ballistic.cheshme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714054100116-c6b5p1rjgslpm0ta1bebth8f7rml9jt2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp5-cx3q9sQiHOx-OWEvPUef5Tive_GUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

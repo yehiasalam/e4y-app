@@ -121,19 +121,21 @@ export class RegisterPage implements OnInit{
                     loading.dismiss();
 
                     let toast = this.toastCtrl.create({
-                        message: res.message,
-                        duration: 2000,
-                        position: 'bottom'
+                        //message: res.message,
+                        message: this.config.get_translation('register_thank_you'),
+                        position: 'bottom',
+                        showCloseButton: true
                     });
 
-                    if(res.status){  
+                    /*if(res.status){  
                         this.userService.getUser();
                         toast.onDidDismiss(() => {
                             this.navCtrl.setRoot(TabsPage);
                         });
-                    }
+                    }*/
                     
                     toast.present();
+                    this.navCtrl.setRoot(TabsPage);
                 }
             });
         }

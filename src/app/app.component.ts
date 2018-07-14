@@ -13,6 +13,7 @@ import { InstructorsPage } from '../pages/instructors/instructors';
 import { ConfigService } from '../services/config';
 import { Storage } from '@ionic/storage';
 import { ImgcacheService } from '../services/imageCache';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,15 +37,18 @@ export class MyApp implements OnInit {
         private app:App,
         private storage:Storage,
         private imgcacheService:ImgcacheService,
-        public splashScreen: SplashScreen) {
+        public splashScreen: SplashScreen,
+        private push: Push) {
 
 
         this.presentLoading();
 
         platform.ready().then(() => {
+            
             if(this.config.settings.rtl){
                platform.setDir('rtl', true);
             }
+            
             this.storage.get('introShown').then((result) => {
                 this.splashScreen.hide();
                 if(result){
@@ -66,6 +70,28 @@ export class MyApp implements OnInit {
                     
                 }
             });
+
+            // initialize the push notification
+            let push_options: PushOptions = {
+                android: {
+                    senderID: "714054100116"
+                },
+                ios: {
+                    alert: 'true',
+                    badge: true,
+                    sound: 'false'
+                },
+                windows: {}
+             };
+             const pushObject: PushObject = this.push.init(push_options);  
+             
+             pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+             pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+             
+             pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));             
+
+
         });
 
         //Tracker
