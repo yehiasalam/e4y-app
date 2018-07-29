@@ -1,5 +1,14 @@
 <ion-header center class="{{user ? 'loggedin': 'non-loggedin'}}">
-    <ion-title *ngIf="!isLoggedIn"><h1>{{config.get_translation('login_heading')}}</h1></ion-title>
+ 
+    <ion-navbar *ngIf="!isLoggedIn" color="transparent" >
+        <ion-buttons start>
+            <button ion-button menuToggle>
+                <ion-icon name="md-menu"></ion-icon>
+            </button>
+        </ion-buttons> 
+        <ion-title>{{config.get_translation('login_heading')}}</ion-title>
+    </ion-navbar>	
+	
     <ion-title *ngIf="isLoggedIn">
     	<div class="user_intro" avatarscrollzoomout>
 			<div class="avatar" (click)="changeImage()">
@@ -35,7 +44,7 @@
 					</ion-row>-->
 					<ion-row *ngIf="config.settings.registration">
 						<ion-col>
-							<button ion-button block outline color="white" (click)="enableRegister()" [innerHtml]="config.get_translation('register_button_label')"></button>
+							<button ion-button block outline color="black" (click)="enableRegister()" [innerHtml]="config.get_translation('register_button_label')"></button>
 						</ion-col>
 					</ion-row>
 					<ion-row *ngIf="config.settings.registration">	
@@ -45,12 +54,12 @@
 					</ion-row>
 					<ion-row>
 						<ion-col col-12>
-							<button ion-button outline block color="white" (click)="showSignIn()" [innerHtml]="config.get_translation('login_signin')"></button>
+							<button ion-button outline block color="black" (click)="showSignIn()" [innerHtml]="config.get_translation('login_signin')"></button>
 						</ion-col>
 					</ion-row>
 					<ion-row>	
 						<ion-col col-12>
-							<button ion-button clear color="white" [innerHtml]="config.get_translation('login_terms_conditions')" (click)="showterms()"></button>
+							<button ion-button clear color="black" [innerHtml]="config.get_translation('login_terms_conditions')" (click)="showterms()"></button>
 						</ion-col>
 					</ion-row>
 				</ion-grid>
@@ -67,8 +76,8 @@
 							<ion-input type="password" formControlName="password"></ion-input>
 						</ion-item>
 					</ion-list>
-					<button ion-button block outline type="submit" color="white" [innerHtml]="config.get_translation('login_signin')"></button>
-					<button ion-button clear center icon-left color="white" (click)="backToLogin()" [innerHtml]="config.get_translation('login_back')"><ion-icon name="md-arrow-back"></ion-icon></button>
+					<button ion-button block outline type="submit" color="black" [innerHtml]="config.get_translation('login_signin')"></button>
+					<button ion-button clear center icon-left color="black" (click)="backToLogin()" [innerHtml]="config.get_translation('login_back')"><ion-icon name="md-arrow-back"></ion-icon></button>
 				</form>
 			</div>
 			<div id="register" *ngIf="register" center>
@@ -88,8 +97,8 @@
 							<ion-input type="password" formControlName="password"></ion-input>
 						</ion-item>
 					</ion-list>
-					<button ion-button block outline type="submit" color="white" [innerHtml]="config.get_translation('login_signup')"></button>
-					<button ion-button clear center icon-left color="white" (click)="backToLogin()" [innerHtml]="config.get_translation('login_back')"><ion-icon name="md-arrow-back"></ion-icon></button>
+					<button ion-button block outline type="submit" color="black" [innerHtml]="config.get_translation('login_signup')"></button>
+					<button ion-button clear center icon-left color="black" (click)="backToLogin()" [innerHtml]="config.get_translation('login_back')"><ion-icon name="md-arrow-back"></ion-icon></button>
 				</form>
 			</div>
 		</div>

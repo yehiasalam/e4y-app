@@ -63,7 +63,7 @@ export class LazyLoadDirective implements OnInit, OnDestroy {
     // remove listeners
     this.loadListener();
     this.errorListener();
-    this.cacheSubscription.unsubscribe();
+    //this.cacheSubscription.unsubscribe();
   }
 
 }

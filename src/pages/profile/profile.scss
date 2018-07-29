@@ -6,7 +6,7 @@ page-profile {
 		background:none !important;
 	}
 	.label-md[floating]{
-	    color:#fff !important;
+	    color:black !important;
 	}
 	ion-item{
 		position:relative;
@@ -70,14 +70,7 @@ page-profile {
 		}
 	}
 	ion-content.non-loggedin{
-	    background: linear-gradient(57deg, #334d5c, #45b29d,#efc94c, #e27a3f, #df5a49);
-	  	background-size: 1000% 100%;
-	  	-webkit-animation: ani 50s ease infinite;
-	  	-moz-animation: ani 50s ease infinite;
-	  	animation: ani 50s ease infinite;
-	  	.scroll-content{
-	  		text-align:center;
-	  	}
+	    background-color: white;
 	}
 	ion-header.loggedin{
 		ion-buttons{
@@ -95,7 +88,7 @@ page-profile {
 	}
 	ion-title{
 		h1{
-			color:#fff !important;
+			color:black !important;
 		}
 
 	}
@@ -108,7 +101,7 @@ page-profile {
 		padding:0;
 	}
 	.signin_content{
-		color:#fff;
+		color:black;
 	  	.scroll-content{
 	  		text-align:center;
 	  	}
@@ -333,7 +326,7 @@ page-profile {
 			}
 			span{
 				font-size:11px;
-				tex-transform:uppercase;
+				text-transform:uppercase;
 				opacity:0.2;
 				font-weight:600;
 				letter-spacing:1px;
@@ -343,21 +336,7 @@ page-profile {
 		    border:none !important;
 		}
 	}
-	@-webkit-keyframes ani {
-	    0%{background-position:4% 0%}
-	    50%{background-position:97% 100%}
-	    100%{background-position:4% 0%}
-	}
-	@-moz-keyframes ani {
-	    0%{background-position:4% 0%}
-	    50%{background-position:97% 100%}
-	    100%{background-position:4% 0%}
-	}
-	@keyframes ani { 
-	    0%{background-position:4% 0%}
-	    50%{background-position:97% 100%}
-	    100%{background-position:4% 0%}
-	}
+
 
 	ion-list{
 		ion-item{
@@ -365,10 +344,6 @@ page-profile {
 		}
 	}
 
-
-	.mycourses_filter {
-		
-	}
 }
 
 .split-pane-main .non-loggedin .scroll-content{

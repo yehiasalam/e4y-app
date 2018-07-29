@@ -123,7 +123,7 @@ export class LoginPage implements OnInit{
                     
                     let toast = env.toastCtrl.create({
                         message: res.message,
-                        duration: 1000,
+                        duration: 4000,
                         position: 'bottom'
                     });
 

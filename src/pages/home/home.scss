@@ -2,6 +2,13 @@ page-home {
 	
 	background-color: #f6f6f6;
 
+	.heading{
+		background-color: #f0f0f0;
+		margin: -16px;
+		padding: 16px;
+		margin-bottom: 10px;		
+	}
+
 	#loading{
 		position:fixed;
 		top:0;left:0;z-index:9999;
@@ -59,7 +66,5 @@ page-home {
 		position:relative;
 	}
 	
-	#popular_courses{
-		
-	} 
+	
 }
