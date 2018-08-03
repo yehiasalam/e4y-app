@@ -1,6 +1,43 @@
 page-home {
 	
-	background-color: #f6f6f6;
+    background-image: url(../assets/images/bg-home.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-position: top center;
+	
+	ion-content{
+		background-color: transparent !important;
+	}
+
+	.intro-profile{
+		margin-bottom: 100px;
+		img{
+			padding-top: 30px;
+			width: 35px;
+		}
+		
+	}
+
+	.intro-block{
+		img{
+			padding-top: 30px;
+			width: 50%;
+		}
+	}
+
+	.courses-container{
+		background-color: rgba(0,0,0,0.2);
+		border-radius: 20px;
+		padding: 20px;
+		margin: 20px;
+		.quote-container{
+			background-color: rgba(0,0,0,0.4);
+			color: white;
+			padding: 20px;
+			border-radius: 20px;
+			margin-bottom: 20px;
+		}
+	}
 
 	.heading{
 		background-color: #f0f0f0;
@@ -61,10 +98,38 @@ page-home {
 			padding-bottom:0;
 		}
 	}
+
 	#homecontent{
 		z-index:9;
 		position:relative;
+		height: 100%;
+
+		ion-icon.down{
+			position: absolute;
+			bottom: 20px;
+			font-size: 3em;
+			color: white;
+
+		}
+
 	}
 	
+	.fadeOutDown {
+		visibility: hidden;
+		opacity: 0;
+		transform: translate3d(0, 20px, 0);
+		transition: visibility 0s 0.5s, opacity 0.5s linear, transform 0.5s linear;
+	  }
+
+	@keyframes fadeOutDown {
+		from {
+		  opacity: 1;
+		}
+	  
+		to {
+		  opacity: 0;
+		  
+		}
+	  }	
 	
 }

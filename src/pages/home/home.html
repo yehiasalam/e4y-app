@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar  color="transparent" >
+    <ion-navbar *ngIf="config.isLoggedIn" color="transparent" >
         <ion-buttons start>
             <button ion-button menuToggle>
                 <ion-icon name="md-menu"></ion-icon>
@@ -9,25 +9,36 @@
         <ion-buttons end>
             <button ion-button [navPush]="profilePage">
                 <ion-icon name="md-contact" *ngIf="!config.isLoggedIn"></ion-icon>
-                <img *ngIf="config.isLoggedIn" [src]="config.settings.url + config.user?.avatar">
+                <img *ngIf="config.isLoggedIn" [src]="config.settings.url + config.user?.avatar" >
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content elastic-header fixedscrollheader>
 
-    <div id="featured" *ngIf="featured && featured.length && config.homePage.featuredCourseSlider">
-        <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" spaceBetween="0">
-            <ion-slide *ngFor="let course of featured">
-                 <lazy-img [inputSrc]="course.featured_image" [navPush]="coursePage" [navParams]="course">2</lazy-img>
-                <span [innerHtml]="course.name"></span>
-            </ion-slide>
-        </ion-slides>
-    </div>
+<ion-content>
 
-    <div id="homecontent" padding>
+    <div id="homecontent" class="center" >
+
+        <div class="center intro-profile" [navPush]="profilePage" >
+            <img src="assets/images/icon-profile.svg" />
+        </div>
+
+        <div class="center intro-block">
+            <img src="assets/images/logo-white.png" />
+        </div>
+
+        <ion-icon name="ios-arrow-down-outline" [ngClass]="{ 'down': true, 'fadeOutDown': animate_arrow }"></ion-icon>
+
+    </div>    
+
+    
+    <div class="courses-container" >
+
+        <div class="quote-container">
+            <span>Think in the morning. Act in the noon. Eat in the evening. Sleep in the night.</span>
+        </div>
+
         <div *ngIf="popular.length && config.homePage.popular">
-            <h3 class="heading"><span>{{config.get_translation('Available Courses')}}</span><span>{{config.get_translation('Continue your 7 Week Challenge')}}</span></h3>
             <div id="popular_courses">
 
                 <ion-grid>
@@ -40,8 +51,8 @@
 
             </div>
         </div>
-    </div>    
-    
+
+    </div>
 
 
 </ion-content>

@@ -18,6 +18,7 @@ import { PinchZoomDirective } from '../directives/pinch-zoom.directive';
 import { ImgcacheService } from "../services/imageCache";
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppAvailability } from '@ionic-native/app-availability';
 //import { InAppPurchase } from '@ionic-native/in-app-purchase';
 import { Camera } from '@ionic-native/camera';
 import { Device } from '@ionic-native/device';
@@ -229,6 +230,7 @@ enableProdMode();
   {provide: ErrorHandler, useClass: IonicErrorHandler},
   DragulaService,
   InAppBrowser,
+  AppAvailability,
   //InAppPurchase,
   Camera,
   Device,

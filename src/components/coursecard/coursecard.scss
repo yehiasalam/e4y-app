@@ -4,10 +4,15 @@ coursecard {
 	display:inline-block;
 	width:100%;
 
+	ion-card{
+		border-radius: 20px !important;
+		background: none !important;
+	}
+
 	.featured_course_block{
 
 		&.locked {
-			opacity: 0.4;
+			opacity: 0.6;
 		}
 
 		.featured_course_image{
@@ -28,9 +33,9 @@ coursecard {
 	
 		div.locked{
 			position: absolute;
-			right: 20px;
+			right: 25px;
 			bottom: 15px;
-			font-size: 2rem;
+			font-size: 3rem;
 			z-index:99;
 			color: black;
 			&:before{

@@ -43,6 +43,7 @@ export class HomePage implements OnInit{
 	profilePage=ProfilePage;
 	coursePage= CoursePage;
 	grid: Array<Array<Course>> = [];
+	animate_arrow: boolean =  false;
 
 	constructor(public navCtrl: NavController,
 		private courseService: CourseService, 
@@ -56,9 +57,15 @@ export class HomePage implements OnInit{
 		
 	}
 
+	ionViewDidEnter(){
+		setTimeout(() => {
+			this.animate_arrow = true;	
+		}, 5000);
+	}
+
 	ngOnInit() {
 		console.log('waiting to be loaded');
-
+		
 		let loading = this.loadingController.create({
             content: '<img src="assets/images/bubbles.svg">',
             duration: 15000,//this.config.get_translation('loadingresults'),

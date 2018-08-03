@@ -1,12 +1,6 @@
 <ion-card [ngClass]="{ 'featured_course_block': true, 'locked': course.locked }" (click)="show_course(course)">
 	<div class="featured_course_image">    
-	    <lazy-img [inputSrc]="url_image + course.featured_image"></lazy-img>
+	    <lazy-img [inputSrc]="course.featured_image"></lazy-img>
 	</div>
-	<ion-card-content class="align-left">
-	    <ion-card-title>
-	        {{course.name}}
-	    </ion-card-title>
-	    <star-rating *ngIf="popular" [rating]=course.average_rating></star-rating>
-	</ion-card-content>
 	<div *ngIf="course.locked" class="locked"></div>
 </ion-card>

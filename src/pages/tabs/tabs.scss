@@ -1,3 +1,11 @@
 .tab-button[aria-selected=true] .tab-button-icon {
     color: #278184 !important;
 }
+
+.guest-tabs{
+    background-color: #073D3A;
+}
+
+.guest-tabs .tabbar > a:first-child{
+    display: none;
+}

@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams } from 'ionic-angular';
 
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Device } from '@ionic-native/device'; 
+
 import { HomePage } from '../home/home';
 import { ContactPage } from '../contact/contact';
 import { CourseStatusPage } from '../course-status/course-status';
@@ -39,18 +44,54 @@ export class TabsPage {
     private navParams: NavParams,
     private config:ConfigService,
     private app:App,
-    private storage:Storage) {
+    private storage:Storage,
+    private device: Device,
+    private iab: InAppBrowser,
+    private appAvailability: AppAvailability) {
     
     this.myIndex = 0;
     if (navParams.data.index){
       this.myIndex = navParams.data.index;
     }
 
+    this.device = device;
+    this.iab = iab;
+    this.appAvailability = appAvailability;
+
 
   }
 
-  ionViewDidEnter(){
-    this.config.updateUser();
-    this.config.getLastCourse();
+  twitter(){
+    this.launchExternalApp('twitter://', 'com.twitter.android', 'twitter://user?screen_name=', 'https://twitter.com/', 'bbc');
   }
+
+  instagram(){
+    this.launchExternalApp('instagram://', 'com.instagram.android', 'instagram://user?username=', 'https://www.instagram.com/', 'bbc');
+  }
+
+  email(){
+    let browser = this.iab.create('mailto:hello@e4y.org.uk?subject=Hi there', '_system');
+  }
+
+  launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string, username: string) {
+    let app: string;
+    if (this.device.platform === 'iOS') {
+      app = iosSchemaName;
+    } else if (this.device.platform === 'Android') {
+      app = androidPackageName;
+    } else {
+      let browser = this.iab.create(httpUrl + username, '_system');
+      return;
+    }
+  
+    this.appAvailability.check(app).then(
+      () => { // success callback
+        let browser = this.iab.create(appUrl + username, '_system');
+      },
+      () => { // error callback
+        let browser = this.iab.create(httpUrl + username, '_system');
+      }
+    );
+  }
+
 }
