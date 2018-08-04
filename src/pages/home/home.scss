@@ -1,16 +1,18 @@
 page-home {
-	
-    background-image: url(../assets/images/bg-home.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-	background-position: top center;
-	
-	ion-content{
+
+	ion-navbar{
 		background-color: transparent !important;
 	}
 
-	.intro-profile{
+	.full-height{
+		height: 100%;
+	}
+
+	.guest-block{
 		margin-bottom: 100px;
+	}
+
+	.intro-profile{
 		img{
 			padding-top: 30px;
 			width: 35px;
@@ -19,6 +21,7 @@ page-home {
 	}
 
 	.intro-block{
+		margin-top:100px;
 		img{
 			padding-top: 30px;
 			width: 50%;
@@ -36,6 +39,7 @@ page-home {
 			padding: 20px;
 			border-radius: 20px;
 			margin-bottom: 20px;
+			text-align: center;
 		}
 	}
 
@@ -102,7 +106,6 @@ page-home {
 	#homecontent{
 		z-index:9;
 		position:relative;
-		height: 100%;
 
 		ion-icon.down{
 			position: absolute;

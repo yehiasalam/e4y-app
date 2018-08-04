@@ -91,7 +91,6 @@ export class MyApp implements OnInit {
              
              pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));             
 
-
         });
 
         //Tracker

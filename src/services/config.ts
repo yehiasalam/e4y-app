@@ -159,15 +159,17 @@ export class ConfigService{
 		this.translations = {
 			'Available Courses': 'Available Challenges',
 			'Continue your 7 Week Challenge': 'Continue your 7 Week Challenge',
-			
+			'Instructor': 'Instructor',	
+			'login_description': 'Join our 7 week challenge and learn creative forms of expressions, from media editing to storytelling.',
+
 			'register_thank_you': 'Thanks for your interest in joining the program. We will get back to you shortly by email with your approval status.',
 			'register_button_label': 'Join the Program',
 
 			'home_title':'Learning Journey',
 			'home_subtitle':'Featured Items',
-			'start_course': 'Start',
+			'start_course': 'Start Course',
 			'search_title':'Searching..',
-			'continue_course': 'Continue',
+			'continue_course': 'Continue Course',
 			'completed_course': 'Completed',
 			'expired_course': 'Expired',
 			'evaluation_course':'Under Evaluation',
@@ -265,7 +267,7 @@ export class ConfigService{
 			'signin_username':'Username or Email',
 			'signin_password':'Password',
 			'signup_username':'Username',
-			'signup_email':'Emails',
+			'signup_email':'Email',
 			'signup_password':'Password',
 			'signup':'Sign Up',
 			'login_back':'Back to login',

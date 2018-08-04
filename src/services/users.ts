@@ -92,10 +92,10 @@ export class UserService{
     }
 
 
-    public getProfile(user_id){
+    public getProfile(user_id, force:boolean=false){
 
         let loadedprofile = this.config.trackComponents('profile');
-        if(loadedprofile){
+        if(loadedprofile && !force){
             return Observable.fromPromise(this.storage.get('profile').then((profile) => {
                 
                 this.profile=profile;

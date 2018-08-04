@@ -5,29 +5,24 @@
                 <ion-icon name="md-menu"></ion-icon>
             </button>
         </ion-buttons> 
-        <ion-title>{{config.get_translation('home_title')}}</ion-title>
-        <ion-buttons end>
-            <button ion-button [navPush]="profilePage">
-                <ion-icon name="md-contact" *ngIf="!config.isLoggedIn"></ion-icon>
-                <img *ngIf="config.isLoggedIn" [src]="config.settings.url + config.user?.avatar" >
-            </button>
-        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-    <div id="homecontent" class="center" >
+    <div id="homecontent" class="center" [ngClass]="{ 'full-height' : !config.isLoggedIn }" >
 
         <div class="center intro-profile" [navPush]="profilePage" >
             <img src="assets/images/icon-profile.svg" />
         </div>
 
-        <div class="center intro-block">
-            <img src="assets/images/logo-white.png" />
-        </div>
+        <div *ngIf="!config.isLoggedIn" class="guest-block">
+            <div class="center intro-block">
+                <img src="assets/images/logo-white.png" />
+            </div>
 
-        <ion-icon name="ios-arrow-down-outline" [ngClass]="{ 'down': true, 'fadeOutDown': animate_arrow }"></ion-icon>
+            <ion-icon name="ios-arrow-down-outline" [ngClass]="{ 'down': true, 'fadeOutDown': animate_arrow }"></ion-icon>
+        </div>
 
     </div>    
 
@@ -35,7 +30,7 @@
     <div class="courses-container" >
 
         <div class="quote-container">
-            <span>Think in the morning. Act in the noon. Eat in the evening. Sleep in the night.</span>
+            <span>Change is the end result of all true learning.</span>
         </div>
 
         <div *ngIf="popular.length && config.homePage.popular">

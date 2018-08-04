@@ -60,7 +60,7 @@ export class HomePage implements OnInit{
 	ionViewDidEnter(){
 		setTimeout(() => {
 			this.animate_arrow = true;	
-		}, 5000);
+		}, 6000);
 	}
 
 	ngOnInit() {
@@ -71,7 +71,6 @@ export class HomePage implements OnInit{
             duration: 15000,//this.config.get_translation('loadingresults'),
             spinner:'hide',
             showBackdrop:true,
-
         });
 
         loading.present();

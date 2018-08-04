@@ -20,19 +20,8 @@ export class InstructorBlock implements OnInit{
 
   	ngOnInit() {
 
-  		if('bio' in this.instructor && this.instructor.bio.length > 200){
-  			this.shortbio = this.instructor.bio.slice(0,200);
-  		}
-  		
   	}
 
-  	showfullBio(show:number){
-  		if(show){
-  			this.showFull=true;
-  		}else{
-  			this.showFull=false;
-  		}
-  		
-  	}
+
 
 }

@@ -1,6 +1,6 @@
 page-intro {
- 	background: #fff;
- 	h1{
+	background: url(../assets/images/bg-home.jpg) top center no-repeat ;
+	h1{
  		text-shadow:0 1px 1px rgba(0,0,0,0.2);
  		font-weight:800;	
 	}
@@ -11,9 +11,14 @@ page-intro {
 	}
  	svg{
  		max-height:60vh !important;
- 	}
+	 }
+	 
+	 .swiper-pagination-bullet-active{
+		 background: #001210;
+	 }
+
  	.jump{
- 		background: #84DBFF;
+		background: url(../assets/images/bg-home.jpg) top center no-repeat ;
     	color: #fff;
     	button{
     		background: #fff;
@@ -28,7 +33,7 @@ page-intro {
     	}
  	}
  	.earn{
- 		background:#324A5E;
+		background: url(../assets/images/bg-home.jpg) top center no-repeat ;
  		color:#fff;
  		button{
     		background: #fff;
@@ -43,7 +48,7 @@ page-intro {
     	}
  	}
  	.sync{
- 		background:#324A5E;
+		background: url(../assets/images/bg-home.jpg) top center no-repeat ;
  		color:#fff;
  		button{
     		background: #fff;
@@ -58,13 +63,13 @@ page-intro {
     	}
  	}
  	.app{
- 		background: #8a63b3;
+		background: url(../assets/images/bg-home.jpg) top center no-repeat ;
  		/*linear-gradient(to bottom, rgba(54,35,65,1) 0%, rgba(166,112,235,1) 51%, rgba(67,95,236,1) 82%, rgba(87,94,227,1) 100%);*/
  		color:#fff;
  		font-weight:600;
  		button{
 		    border: none !important;
-		    background: #3ecf8e !important;
+		    background: #073D3A !important;
 		    color: #fff !important;
 		    text-shadow: 0 1px 3px rgba(36,180,126,.4);
 		    font-weight: 600;border-radius: 4rem;

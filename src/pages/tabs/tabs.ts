@@ -33,6 +33,7 @@ export class TabsPage {
   directoryPage: any = DirectoryPage;
   updates:any = UpdatesPage;
   wallet:any =WalletPage;
+  color_tab: string = 'transparent';
 
   page:any;
   user: any;
@@ -58,6 +59,19 @@ export class TabsPage {
     this.iab = iab;
     this.appAvailability = appAvailability;
 
+    this.app.viewDidEnter.subscribe((evt) => {
+      // this is a super retarded way to identify the curret view
+      // figure something else later
+      if (evt.instance.hasOwnProperty('currentTab') ){ 
+        console.log('Entered Profile Tba');
+        this.color_tab = 'secondary';
+      } else if ( evt.instance.hasOwnProperty('showSpinner') ){
+        // do nothing, keep same color
+      } else {
+        this.color_tab = 'transparent';
+      }
+      
+   });
 
   }
 

@@ -6,16 +6,15 @@
                 <ion-icon name="md-menu"></ion-icon>
             </button>
         </ion-buttons> 
-        <ion-title>{{config.get_translation('login_heading')}}</ion-title>
     </ion-navbar>	
 	
     <ion-title *ngIf="isLoggedIn">
     	<div class="user_intro" avatarscrollzoomout>
 			<div class="avatar" (click)="changeImage()">
-				<lazy-img [inputSrc]="config.settings.url + config.user.avatar"></lazy-img>
+				<lazy-img [inputSrc]="config.user.avatar"></lazy-img>
 			</div>
 			<h1>{{user?.name}}<span>{{user?.email}}</span></h1>
-    		<button icon-only ion-button clear color="white" (click)=initiate_logout()><ion-icon name="md-power"></ion-icon></button>
+    		<button icon-only ion-button clear color="white" (click)=initiate_logout()><ion-icon name="log-out"></ion-icon></button>
 		</div>
     </ion-title>
     <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" *ngIf="isLoggedIn" #ProfileTabs id="profiletabs" spaceBetween="0" slidesPerView="4" (ionSlideDidChange)="onTabChanged()">
@@ -28,6 +27,7 @@
     </ion-slides>
 </ion-header>
 <ion-content class="{{isLoggedIn ? 'loggedin': 'non-loggedin'}}">
+	
 	<div class="signin_register" *ngIf="!isLoggedIn">
 		<div class="signin_content" padding>
 			<div id="signin" *ngIf="!register && !signin" center>
@@ -54,12 +54,12 @@
 					</ion-row>
 					<ion-row>
 						<ion-col col-12>
-							<button ion-button outline block color="black" (click)="showSignIn()" [innerHtml]="config.get_translation('login_signin')"></button>
+							<button ion-button outline block color="white" (click)="showSignIn()" [innerHtml]="config.get_translation('login_signin')"></button>
 						</ion-col>
 					</ion-row>
 					<ion-row>	
 						<ion-col col-12>
-							<button ion-button clear color="black" [innerHtml]="config.get_translation('login_terms_conditions')" (click)="showterms()"></button>
+							<button ion-button clear color="white" [innerHtml]="config.get_translation('login_terms_conditions')" (click)="showterms()"></button>
 						</ion-col>
 					</ion-row>
 				</ion-grid>
@@ -193,7 +193,7 @@
 					                	<ion-card *ngIf="course && course.show" [navPush]="courseStatusPage" [navParams]="{'course':course,'user':user}" >
 								            <div class="course_block">
 								                <div class="course_featured_image">
-								                    <img [src]="config.settings.url + course.featured_image">
+								                    <img [src]="course.featured_image">
 								                </div>
 								                <ion-card-content class="align-left">
 								                    <ion-card-title>
@@ -305,16 +305,6 @@
 	                </div>
 	                <div id="profiletabs" *ngIf="(tab.key == 'settings')">
 	                	<ion-list>
-						    <ion-list-header [innerHtml]="config.get_translation('')"></ion-list-header>
-							    <ion-item>
-							      	<ion-toggle checked="false"></ion-toggle>
-							      	<ion-label [innerHtml]="config.get_translation('email_certificates')"></ion-label>
-							    </ion-item>
-						    <ion-list-header [innerHtml]="config.get_translation('saved_information')"></ion-list-header>
-						    	<ion-item>
-								    <ion-label [innerHtml]="config.get_translation('client_id')"></ion-label>
-							  		<ion-note item-end="" class="note note-md">{{config.settings.client_id}}</ion-note>
-							  	</ion-item>
 						    <ion-list-header [innerHtml]="config.get_translation('manage_data')"></ion-list-header>
 							    <ion-item>
 							    	<ion-label [innerHtml]="config.get_translation('clear_cache')"></ion-label>

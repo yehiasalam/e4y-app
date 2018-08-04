@@ -2,6 +2,10 @@ ion-tabs page-course-status vg-player.native-fullscreen vg-controls{
 	bottom:50px;
 }
 
+ion-navbar{
+	background-color: transparent !important;
+}
+
 page-course-status {
 	.title{
 		progress-bar{
@@ -37,7 +41,7 @@ page-course-status {
 	    ion-slide{
 	    	.slide-zoom>h3{
     		    margin-top: 0;
-			    color: #333;
+			    color: white;
 			    padding: 30px 20px 0;
 			    text-align: start;
 			    friendlytime{
@@ -148,20 +152,21 @@ page-course-status {
 		}
 	}
 	#course_timeline{
-	    position: fixed;
-	    left: 0;
-	    top: 0;
-	    z-index: 9;
-	    background: map-get($colors, primary);
-	    overflow-y: auto;
-	    padding: 60px 15px 40px;
-	    height: 100vh;
-	    width: 100%;
-	    transition: all 500ms ease-in;
-	    transform:translateX(-200%);
-	    &.active{
-	    	transform:translateX(0);
-	    }
+
+		padding: 20px;
+		text-align: left;
+		font-size: 0.85em;
+		padding-top: 0px;
+
+		.cover-container{
+			text-align: center;
+			img{
+				width: 100px;
+				border-radius: 20px;
+				margin-bottom: 20px;
+			}
+		}
+
 	    .progress_wrap{
 		    .progress-outer{
 	    	    background: rgba(0,0,0,0.2);
@@ -325,7 +330,7 @@ page-course-status {
 		button{
 			border: 2px solid;
 		    margin: 0 0 10px 0;
-		    border-radius: 5px;
+		    border-radius: 20px;
 		}
 	}
 	.retake_quiz span{

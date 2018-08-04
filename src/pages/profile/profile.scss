@@ -1,6 +1,22 @@
 page-profile {
+
+	ion-header{
+		background-image: url(../assets/images/bg-home.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: top center;
+	}
+
+	ion-navbar{
+		background-color:transparent !important;
+	}
+
+	.swiper-slide.swiper-slide-active{
+		border-bottom: 4px solid white;
+	}
+
 	ion-slides[slidesperview="4"] ion-slide{
-	max-width:none;
+		max-width:none;
 	}
 	button.button-menutoggle{
 		background:none !important;
@@ -40,15 +56,13 @@ page-profile {
 		}
 	}
 	#profiletabs{
-		.swiper-wrapper{
-			padding-bottom:10px;
-		}
+
 		.profile_tab{
 		    font-size: 2rem;
 	        margin: -1px;
 		    padding: 10px 8px;
 		    color: #fff;
-		    background:map-get($colors, primary);
+
 			span{
 			    display: block;
 			    font-size: 1rem;white-space:nowrap;
@@ -56,18 +70,6 @@ page-profile {
 			}
 		}
 		
-		.swiper-slide.swiper-slide-active .profile_tab{
-			position:relative;
-			&:after{
-				content:'';
-			    display:block;
-			    position:absolute;
-			    left:50%;bottom:-20px;
-			    margin-left: -10px;
-			    border:10px solid; 
-			    border-color:map-get($colors, primary) transparent transparent;
-			}
-		}
 	}
 	ion-content.non-loggedin{
 	    background-color: white;
@@ -86,12 +88,7 @@ page-profile {
 	ion-header{
 		.button[icon-only]{background:none;}
 	}
-	ion-title{
-		h1{
-			color:black !important;
-		}
 
-	}
 	
 	h3.heading{
 		text-align:start;
@@ -101,7 +98,8 @@ page-profile {
 		padding:0;
 	}
 	.signin_content{
-		color:black;
+		color:white;
+		text-align: center;
 	  	.scroll-content{
 	  		text-align:center;
 	  	}
@@ -125,6 +123,8 @@ page-profile {
 			letter-spacing:1px;
 			text-transform:uppercase;
 			border:2px solid;
+			border-radius: 20px;
+			color: white;
 		}
 
 		#facebook_login{
@@ -184,7 +184,7 @@ page-profile {
 		}
 	}
 	.user_intro{
-		background: map-get($colors, primary);
+
 	  	text-align:center;
 	  	.avatar{
 	  		position:relative;
@@ -206,13 +206,13 @@ page-profile {
 	  	h1{
 	  		color:#fff;
 	  		text-transform:uppercase;
-	  		font-size:16px;
+	  		font-size:20px;
 	  		margin:0;
 	  		padding:10px 0;
 	  		span{
 	  			text-transform:none;
 	  			display:block;
-	  			font-size:1rem;
+	  			font-size:1.2rem;
 	  			opacity:0.8;
 	  		}
 	  		&+button{
@@ -256,14 +256,14 @@ page-profile {
 	}
 
 	#dashboard{
-		margin:-10px;
 		width:auto;
 		ion-col > div{
 		    padding: 15px 0;
 		    text-transform: uppercase;
 		    text-align: center;
 		    border: 1px solid #ddd;
-		    background: #eee;
+			background: #073D3A;
+			color: white;
 		    strong{font-size: 3rem;}
 		    span{display: block;font-size: 1rem;}
 		}

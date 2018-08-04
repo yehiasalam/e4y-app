@@ -1,4 +1,15 @@
 page-login {
+
+	color: white;
+
+	ion-navbar{
+		background-color: transparent !important;
+	}
+
+	ion-label, ion-input{
+		color: white;
+	}
+
 	ion-slides[slidesperview="4"] ion-slide{
 	max-width:none;
 	}
@@ -129,6 +140,7 @@ page-login {
 			letter-spacing:1px;
 			text-transform:uppercase;
 			border:2px solid;
+			border-radius: 20px;
 		}
 
 		#facebook_login{
