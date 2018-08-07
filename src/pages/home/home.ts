@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 //import {StatusBar} from 'ionic-native';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -52,9 +53,10 @@ export class HomePage implements OnInit{
 		public userService:UserService,
 		private config:ConfigService,
 		private wishlistService:WishlistService,
+		public splashscreen: SplashScreen
 		/*private walletService:WalletService*/ 
 	) {
-		
+		this.splashscreen = splashscreen;
 	}
 
 	ionViewDidEnter(){
@@ -92,6 +94,7 @@ export class HomePage implements OnInit{
 					this.fill_grid(popular);
 				}
 				loading.dismiss();
+				this.splashscreen.hide();
 			});
 
 			this.courseService.getAllCourseCategory().subscribe(cats =>{

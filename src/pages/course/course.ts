@@ -199,5 +199,10 @@ export class CoursePage implements OnInit{
         }
       }
 
+      is_persian_desc(text){
+        var persian = /[\u0600-\u06FF]/;
+        return persian.test(this.fullCourse.description);
+      }
+
 
 }

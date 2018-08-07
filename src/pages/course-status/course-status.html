@@ -141,7 +141,7 @@
                 <div *ngIf="item.type == 'unit' && item.meta.iframes && item.meta.iframes.length">
                     <div class="course_item_iframe" *ngFor="let iframeUrl of item.meta.iframes">
                         <iframe width="100%" height="100%" [src]="iframeUrl | safeUrl" frameborder="0" allowfullscreen></iframe>
-                        <button ion-button (click)="openIab(iframeUrl)" [innerHtml]="config.get_translation('open_in_new_window')"></button>
+                        <!--<button ion-button (click)="openIab(iframeUrl)" [innerHtml]="config.get_translation('open_in_new_window')"></button>-->
                     </div>
                 </div>
 

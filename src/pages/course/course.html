@@ -28,7 +28,7 @@
                 
                 <ion-slide *ngFor="let tab of coursetabs; let i=index;">
                    
-                    <div class="{{tab}}" *ngIf="(tab == 'description')" [innerHTML]="fullCourse[tab] | safeHtml"></div>
+                    <div class="{{tab}}" [ngClass]="{ 'rtl': is_persian_desc() }"  *ngIf="(tab == 'description')" [innerHTML]="fullCourse[tab] | safeHtml"></div>
                     
                     <!-- curriculum tab, visible only when logged in -->
                     <div class="{{tab}}" *ngIf="(tab == 'curriculum')">
