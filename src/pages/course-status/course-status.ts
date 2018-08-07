@@ -275,8 +275,14 @@ export class CourseStatusPage implements OnInit{
       return this.domSanitizer.bypassSecurityTrustResourceUrl(iframe);
     }
 
+    selectedItem(i:number){
+      //this.timelineactive = 0;
+      this.courseStatusItems.slideTo(i + 1, 400);
+      this.content.scrollToTop();
+    }
+
     onSlideChanged(){
-      let index = this.courseStatusItems.getActiveIndex();
+      let index = this.courseStatusItems.getActiveIndex() - 1;
       this.content.scrollToTop();
 
         if(this.coursestatus.courseitems.length > index){
@@ -511,12 +517,6 @@ export class CourseStatusPage implements OnInit{
 
     endQuiz(quiz){
       this.triggerQuizSubmit();
-    }
-
-    selectedItem(i:number){
-      this.timelineactive = 0;
-      this.courseStatusItems.slideTo(i, 500);
-      this.content.scrollToTop();
     }
 
     QuestionChecked(question:any,index:number){

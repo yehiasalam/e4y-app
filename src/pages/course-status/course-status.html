@@ -36,7 +36,7 @@
                         <progress-bar *ngIf="coursestatus.progress && coursestatus.progress > -1" [progress]="coursestatus.progress"></progress-bar>
                         <div id="curriculum_timeline">
                             <ion-list>
-                                <ion-item *ngFor="let item of coursestatus.courseitems; let i=index;" (click)="selectedItem(i+1)" [class]="item.type">
+                                <ion-item *ngFor="let item of coursestatus.courseitems; let i=index;" (click)="selectedItem(i)" [class]="item.type">
                                     <strong><strong [innerHtml]=item.title></strong>
                                         <span [ngClass]="{ 'active': (coursestatus.current_unit_key === i), 'done': (item.status > 0) }"></span>
                                     </strong>
