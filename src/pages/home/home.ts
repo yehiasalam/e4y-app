@@ -23,6 +23,7 @@ import { UserService } from '../../services/users';
 import { User } from '../../models/user';
 import { Course } from '../../models/course';
 import { CourseCategory } from '../../models/course';
+import { Quote } from '../../models/quote';
 
 import { FixedScrollHeader } from '../../components/fixed-scroll-header/fixed-scroll-header';
 import { Coursecard } from '../../components/coursecard/coursecard';
@@ -45,6 +46,7 @@ export class HomePage implements OnInit{
 	coursePage= CoursePage;
 	grid: Array<Array<Course>> = [];
 	animate_arrow: boolean =  false;
+	quote: Quote;
 
 	constructor(public navCtrl: NavController,
 		private courseService: CourseService, 
@@ -68,6 +70,8 @@ export class HomePage implements OnInit{
 	ngOnInit() {
 		console.log('waiting to be loaded');
 		
+		this.quote = this.getRandomQuote();
+
 		let loading = this.loadingController.create({
             content: '<img src="assets/images/bubbles.svg">',
             duration: 15000,//this.config.get_translation('loadingresults'),
@@ -118,6 +122,23 @@ export class HomePage implements OnInit{
 
 			rowNum++; //go on to the next row
 		}
+	}
+
+	getRandomQuote(){
+
+		let min = 0,
+			max = this.config.quotes_library.length - 1;
+		
+		return this.config.quotes_library[ this.getRandomInt(min,max) ];
+
+	}
+
+	/**
+	 * Returns a random integer between min (inclusive) and max (inclusive)
+	 * Using Math.round() will give you a non-uniform distribution!
+	 */
+	getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
 	openSearch(){

@@ -1,5 +1,5 @@
 <ion-slides dir="{{config.settings.rtl ? 'rtl' : undefined }}" pager="true" #IntroTabs>
-  <ion-slide class="jump">
+  <ion-slide class="jump" random-bg>
    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
     <g>
@@ -92,12 +92,12 @@
     }.swiper-slide-active #circle{transform: scale(1);}.swiper-slide-active #pencil{transition: all 2s; transform:translateY(0%);}.swiper-slide-active #sparks{transform: scale(1);}
     </style>
     </svg>
-    <h1>Learn anywhere. </h1>
-    <h3>Get started with mobile learning !</h3>
-    <button ion-button color="white" (click)="proceed()">Proceed</button>
+    <h1>{{config.get_translation('Learn anywhere')}}</h1>
+    <h3>{{config.get_translation('Get started with mobile learning')}}</h3>
+    <button ion-button color="white" (click)="proceed()">{{config.get_translation('Proceed')}}</button>
   </ion-slide> 
  
-  <ion-slide class="earn">
+  <ion-slide class="earn" random-bg>
     
 
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -171,12 +171,12 @@
   .swiper-slide-active .flower{transform: scale(1);}
 </style>
 </svg>
-    <h1>Learn and Earn Skills</h1>
-    <h3>Get rewards, certificates & badges!</h3>
-    <button ion-button color="white" (click)="proceed()">Proceed</button>
+    <h1>{{config.get_translation('Learn and Earn Skills')}}</h1>
+    <h3>{{config.get_translation('Get rewards, certificates & badges!')}}</h3>
+    <button ion-button color="white" (click)="proceed()">{{config.get_translation('Proceed')}}</button>
   </ion-slide>
  
-  <ion-slide class="sync">
+  <ion-slide class="sync" random-bg>
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <g>
@@ -280,12 +280,12 @@
   
 </style>
 </svg>
-    <h1>Anywhere, anytime</h1>
-    <h3>Boost your career growth with anytime anywhere learning !</h3>
-    <button ion-button color="white" (click)="proceed()">Proceed</button>
+    <h1>{{config.get_translation('Anywhere, anytime')}}</h1>
+    <h3>{{config.get_translation('Boost your career growth with anytime anywhere learning!')}}</h3>
+    <button ion-button color="white" (click)="proceed()">{{config.get_translation('Proceed')}}</button>
   </ion-slide>
  
-  <ion-slide class="app">
+  <ion-slide class="app" random-bg>
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <g>
@@ -378,8 +378,8 @@
 }
 </style>
 </svg>
-        <h3>Cheshme Creative Challenge</h3>
-        <button ion-button color="white" (click)="goToHome()">Get Started Now !</button>
+        <h3>{{config.get_translation('Cheshme Creative Challenges')}}</h3>
+        <button ion-button color-primary="color" (click)="goToHome()">{{config.get_translation('Get Started Now!')}}</button>
   </ion-slide>
  
 </ion-slides>

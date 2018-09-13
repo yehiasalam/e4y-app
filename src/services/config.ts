@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
 
+import { Quote } from '../models/quote';
+
+import { TranslateService } from './translate';
+
 @Injectable()
 export class ConfigService{  
 	
@@ -23,8 +27,13 @@ export class ConfigService{
 
 	defaultMenu:any;
 	per_view:number=10;
-	translations: any;
+	//translations: any;
 	directoryFilters:any;
+
+	quotes_library: Quote[];
+	bgs: [string, string][];
+	bg: string;
+	color: string;
 
 	/*
 		IMPORTANT DO NOT TOUCH
@@ -38,11 +47,15 @@ export class ConfigService{
 	wallet:any=[];
 	/*== END == */
 
+	translate: TranslateService;
+
 	constructor(
 		private storage:Storage,
-		private http:Http)
+		private http:Http,
+		private translate_service: TranslateService)
 	{
 
+		this.translate = translate_service;
 		this.loading=true;
 		this.timestamp =  Math.floor(new Date().getTime() / 1000);
 		this.environment ={
@@ -57,11 +70,11 @@ export class ConfigService{
 		});
 
 		this.per_view = 5;
-		this.settings ={
+		this.settings = {
 			'version':2,
 			//'url':'http://localhost/wplms/',
 			//'client_id':'X8bmmV0UE1AvZbnS7Rl7pCU',
-			'url':'http://cheshmecreativechallenge.com/',
+			'url':'http://cheshmecreativechallenges.com/',
 			'client_id':'JUUY8FXlszqEtuI3bahWpco',
 			'client_secret':'', //Fetched from API call
 			'state':'', // FETCHED from Site
@@ -79,8 +92,9 @@ export class ConfigService{
 			'force_mark_all_questions':false,
 			'wallet':false,					// <<----------REQUIRES WPLMS version 3.4
 			'inappbrowser_purchases':false, // <<----------REQUIRES WPLMS version 3.4
-			'rtl':false,
-			'units_in_inappbrowser':false,
+			'rtl': true,
+			'units_in_inappbrowser': false,
+			'lang': 'fr'
 		};
 
 		this.baseUrl = this.settings.url+'wp-json/wplms/v1/';
@@ -156,226 +170,36 @@ export class ConfigService{
 		this.track = this.defaultTrack;
 		this.unread_notifications_count=0;
 
-		this.translations = {
-			'Available Courses': 'Available Challenges',
-			'Continue your 7 Week Challenge': 'Continue your 7 Week Challenge',
-			'Instructor': 'Instructor',	
-			'login_description': 'Join our 7 week challenge and learn creative forms of expressions, from media editing to storytelling.',
+		this.quotes_library = [
+			{ quote: "ما انسان‌ها  جانشین و امانت‌دار خداوند بر زمین هستیم. ازطبیعت که از  امانت‌های خداست  با دقت مراقبت کنیم، آن را برای آیندگان محافظت کنیم. ", author: "برگرفته از سوره‌های بقره، نمل، نسا و اعراف"},
+			{ quote: "همه موجودات، آسمان‌ها و زمین و جنبندگان نشانه و یادگار خداوند هستند.", author: "برگرفته از سوره شوری"},
+			{ quote: "زمین را نوازش کنید و از آن برکت بگیرید؛ زیرا او مادر شماست ،مادری که به فرزندانش مهربان است. ", author: "برگرفته از توصیه‌های پیامبر اسلام"},
+			{ quote: "در جهان‌بینی قرآن، هستی یک سیستم و نظام درهم تنیده است که همه اجزای آن هماهنگ و هم‌ساز هستند. ", author: ""},
+			{ quote: "اگر رستاخیز هم  بر پا شد و نهالی در دست یکی از شما است ؛ اگر می‌توانید آن را بکارید.", author: "برگرفته از توصیه‌های پیامبر اسلام"},
+			{ quote: " انسان در قبال آنچه به او ارزانی شده مسئول است چرا که امانت الهی است و بدین معنی نیست که او آزاد است هر گونه مایل است با آن رفتار نماید .", author: "برگرفته از توصیه‌های پیامبر اسلام"}	
+		];
 
-			'register_thank_you': 'Thanks for your interest in joining the program. We will get back to you shortly by email with your approval status.',
-			'register_button_label': 'Join the Program',
+		this.bgs = [
+			['bg-home-03', '#29534f' ],
+			['bg-home-04', '#99cb34'],
+			['bg-home-05', '#3aafa9' ],
+			['bg-home-06', '#2b7a77'],
+			['bg-home-07', '#18252b'],
+			['bg-home-08', '#fb8f2d' ],
+			['bg-home-09', '#bf6d23' ],
+			['bg-home-10', '#8d501a'],
+			['bg-home-11', '#ff912f' ],
+			['bg-home-12', '#99cb34'],
+			['bg-home-13', '#729926' ],
+			['bg-home-14', '#55731d' ],
+			['bg-home-15', '#ffe603' ],
+			['bg-home-16',  '#ccb702']
+		];
+		let rnd = this.getRandomInt(0,this.bgs.length - 1);
+		this.bg = this.bgs[rnd][0];
+		this.color = this.bgs[rnd][1];
 
-			'home_title':'Learning Journey',
-			'home_subtitle':'Featured Items',
-			'start_course': 'Start Course',
-			'search_title':'Searching..',
-			'continue_course': 'Continue Course',
-			'completed_course': 'Completed',
-			'expired_course': 'Expired',
-			'evaluation_course':'Under Evaluation',
-			'no_reviews':'No reviews found for this challenge.',
-			'year': 'year',
-			'years': 'years',
-			'month': 'month',
-			'months': 'months',
-			'week':'week',
-			'weeks':'weeks',
-			'day':'day',
-			'days':'days',
-			'hour':'hour',
-			'hours':'hours',
-			'minute':'minute',
-			'minutes':'minutes',
-			'second':'second',
-			'seconds':'seconds',
-			'expired':'expired',
-			'completed':'completed',
-			'start_quiz':'Start Quiz',
-			'save_quiz':'Save Quiz',
-			'submit_quiz':'Submit Quiz',
-			'marks': 'Marks',
-			'marks_obtained':'Marks obtained',
-			'max_marks':'Maximum Marks',
-			'true':'TRUE',
-			'false':'FALSE',
-			'checkanswer':'Check Answer',
-			'score':'SCORE',
-			'progress': 'PROGRESS',
-			'time': 'TIME',
-			'filter_options':'FILTER OPTIONS',
-			'sort_options':'SORT OPTIONS',
-			'popular':'Popular',
-			'recent':'Recent',
-			'alphabetical':'Alphabetical',
-			'rated':'Highest Rated',
-			'start_date':'Upcoming',
-			'okay':'OKAY',
-			'dismiss':'DISMISS',
-			'select_category':'Select Category',
-			'select_location':'Select Location',
-			'select_level':'Select Level',
-			'select_instructor':'Select Instructor',
-			'free_paid':'Select Challenge price',
-			'price':'Price',
-			'apply_filters':'Apply Filters',
-			'close':'Close',
-			'not_found':'No challenges found matching your criteria',
-			'no_courses':'No Challenges !',
-			'course_directory_title':'All Challenges',
-			'course_directory_sub_title':'Challenges Directory',
-			'all':'All',
-			'all_free':'Free',
-			'all_paid':'Paid',
-			'select_online_offline':'Select Challenge type',
-			'online':'Online',
-			'offline':'Offline',
-			'after_start_date':'Starts after date',
-			'before_start_date':'Starts before date',
-			'instructors_page_title':'All Instructors',
-			'instructors_page_description':'Instructor Directory',
-			'no_instructors':'No Instructors found',
-			'get_all_course_by_instructor':' View all Challenges by Instructor ',
-			'profile':'Profile',
-			'about':'About',
-			'courses':'Challenges',
-			'marked_answer':'Marked Answer',
-			'correct_answer':'Correct Answer',
-			'explanation': 'Explanation',
-			'awaiting_results':'Awaiting Quiz Results',
-			'quiz_results':'Quiz Result',
-			'retake_quiz':'Retake Quiz',
-			'quiz_start':'Quiz Started',
-			'quiz_start_content':'You started quiz',
-			'quiz_submit':'Quiz submitted',
-			'quiz_submit_content':'You submitted quiz',
-			'quiz_evaluate':'Quiz evaluated',
-			'quiz_evaluate_content':'Quiz Evaluated',
-			'certificate':'Certificate',
-			'badge':'Badge',
-			'no_notification_found':'No notifications found !',
-			'no_activity_found' :' No Activity found !',
-			'back_to_course':'Back to Challenge',
-			'review_course':'Review Challenge',
-			'finish_course':'Finish Challenge',
-			'login_heading':'Login',
-			'login_title':'Get Started',
-			'login_content':'Your challenges will be available on all of your devices',
-			'login_have_account':'Already have an account',
-			'login_signin':'Sign In',
-			'login_signup':'Sign Up',
-			'login_terms_conditions':'Terms and Conditions',
-			'signin_username':'Username or Email',
-			'signin_password':'Password',
-			'signup_username':'Username',
-			'signup_email':'Email',
-			'signup_password':'Password',
-			'signup':'Sign Up',
-			'login_back':'Back to login',
-			'post_review':'Post a review for this challenge',
-			'review_title':'Title for Review',
-			'review_rating': 'Rating for this review',
-			'review_content': 'Content for Review',
-			'submit_review': 'Post Review',
-			'rating1star':'Bad Challenge',
-			'rating2star':'Not up to the mark',
-			'rating3star':'Satisfactory',
-			'rating4star':'Good Challenge',
-			'rating5star':'Excellent',
-			'failed':'Failed',
-			'user_started_course':'You started a challenge',
-			'user_submitted_quiz':'You submitted the quiz',
-			'user_quiz_evaluated':'Quiz evaluated',
-			'course_incomplete':'Challenge Incomplete',
-			'finish_this_course':'Please mark all the units of this challenge',
-			'ok':'OK',
-			'update_title':'Updates',
-			'update_read':'Read',
-			'update_unread':'Unread',
-			'no_updates':'No updates found',
-			'wishlist_title': 'Wishlist',
-			'no_wishlist':'No wishlist challenges found',
-			'no_finished_courses':'No Finished challenges!',
-			'no_results':'No results found!',
-			'loadingresults':'Please wait...',
-			'signup_with_email_button_label':'Signup with your email',
-			'clear_cache':'Clear Offline data',
-			'cache_cleared':'Offline cache cleared',
-			'sync_data':'Sync Data',
-			'data_synced':'Data Synced',
-			'logout':'Logout',
-			'loggedout':'You have successfully logged out !',
-			'register_account':'Login or Create an account to continue !',
-			'email_certificates':'Email certificates',
-			'manage_data':'Manage Stored Data',
-			'saved_information':'Saved Information',
-			'client_id':'Site Key',
-			'saved_quiz_results':'Saved Results','timeout':'TimeOut',
-			'app_quiz_results':'Results',
-			'change_profile_image':'Change Profile image',
-			'pick_gallery':'Set image from gallery',
-			'take_photo':'Take my photo',
-			'cancel':'Cancel',
-			'blog_page':'Blog Page',
-			'course_chart':'Challenge Statistics',
-			'quiz_chart':'Quiz Statistics',
-			'percentage':'Percentage',
-			'scores':'Scores',
-			'edit':'Edit',
-			'change':'Change',
-			'edit_profile_field':'Edit Profile Field',
-			'pull_to_refresh':'Pull to refresh',
-			'refreshing':'...refreshing',
-			'contact_page':'Contact',
-			'contact_name':'Name',
-			'contact_email':'Email',
-			'contact_message':'Message',
-			'contact_follow_us':'Follow Us',
-			'invalid_url':'Invalid url value',
-			'read_notifications':'Read notifications',
-			'unread_notifications':'Unread Notifications',
-			'logout_from_device':'Are you sure you want to logout from this device?',
-			'accept_continue':'Accept and Continue',
-			'finished':'Finished',
-			'active':'Active',
-			'open_results_on_site':'Please check results for this quiz in browser.',
-			'show_more':'more',
-			'show_less':'less',
-
-			'buy':'Buy',
-			'pricing_options':'Pricing Options',
-			'pricing_options_title':'Pricing Options (swipe to select)',
-			'home_menu_title':'Home',
-			'directory_menu_title':'Directory',
-			'instructors_menu_title':'Instructors',
-			'blog_menu_title':'Blog',
-			'contact_menu_title':'Contact',
-			'popular_courses_title_home_page':'Popular Challenges',
-			'popular_courses_subtitle_home_page':'Popular and trending challenges',
-			'categories_title_home_page':'Categories',
-			'categories_subtitle_home_page':'Browse challenges via Challenge category',
-			'directory_search_placeholder':'Search',
-			'featured_courses':'Featured Challenges',
-			'selected_courses':'Selected Challenges',
-			'markallquestions':'Please mark all questions first.',
-
-			'credit':'Credit',
-			'debit':'Debit',
-			'wallet_no_products':'Consult Admin to create Wallet Products !',
-			'wallet_no_transactions': 'No transactions found !',
-			'pay_from_wallet': 'Pay from Wallet',
-			'use_wallet':'Use Wallet amount to purchase',
-			'pay':'PAY',
-			'login_to_buy':'Please Login to Buy this challenges',
-			'login_again':'Please re-login to purchase this challenges',
-			'insufficient_funds':'Insufficient funds in wallet ! Add more funds.',
-			'buy_from_site': 'Buy from Site',
-			'description':'description',
-			'curriculum':'curriculum',
-			'reviews':'reviews',
-			'instructors':'instructors',
-			'retakes_remaining':'Retakes Remaining',
-			'open_in_new_window':'Open in New Window'
-		};
+		//this.translations = 
 
 		this.contactinfo={
 			'title':'Contact Us',
@@ -386,13 +210,15 @@ export class ConfigService{
 			'twitter':'vibethemes',
 			'facebook':'vibethemes',
 		};
+
 		this.terms_conditions = 'These are app terms and conditions. Any user using this app must have\
 		an account on site YouRSite.com. You must not distribute videos in this app to third parties.';
 	}
 
 	get_translation(key:string){
-		if(this.translations[key]){
-			return this.translations[key];
+
+		if( this.translate.get(key, this.settings['lang']) ){
+			return this.translate.get(key, this.settings['lang']);
 		}
 	}
 
@@ -721,4 +547,14 @@ export class ConfigService{
 	}
 	isString(val) { return typeof val === 'string'; }
 	isArray(obj: any): boolean {return Array.isArray(obj);}
+
+
+	/**
+	 * Returns a random integer between min (inclusive) and max (inclusive)
+	 * Using Math.round() will give you a non-uniform distribution!
+	 */
+	getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
 }

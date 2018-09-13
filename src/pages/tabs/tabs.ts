@@ -64,7 +64,7 @@ export class TabsPage {
       // figure something else later
       if (evt.instance.hasOwnProperty('currentTab') ){ 
         console.log('Entered Profile Tba');
-        this.color_tab = 'secondary';
+        //this.color_tab = this.config.color;
       } else if ( evt.instance.hasOwnProperty('showSpinner') ){
         // do nothing, keep same color
       } else {
@@ -80,7 +80,7 @@ export class TabsPage {
   }
 
   instagram(){
-    this.launchExternalApp('instagram://', 'com.instagram.android', 'instagram://user?username=', 'https://www.instagram.com/', '');
+    this.launchExternalApp('instagram://', 'com.instagram.android', 'instagram://user?username=', 'https://www.instagram.com/', 'cheshme_creative_challenges');
   }
 
   email(){

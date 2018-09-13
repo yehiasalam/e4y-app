@@ -14,6 +14,8 @@ import { LazyImgComponent }   from '../components/lazy-img/lazy-img';
 import { LazyLoadDirective }   from '../directives/lazy-load.directive';
 import { PressDirective }   from '../directives/longPress.directive';
 import { PinchZoomDirective } from '../directives/pinch-zoom.directive';
+import { BackgroundImageDirective }   from '../directives/background-image.directive';
+import { ColorDirective }   from '../directives/color.directive';
 
 import { ImgcacheService } from "../services/imageCache";
 
@@ -35,7 +37,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { BlogPage } from '../pages/blog/blog';
 import { PostPage } from '../pages/post/post';
 import { BlogService } from '../services/blog';
-
+import { TranslateService } from '../services/translate';
 
 import { UpdatesPage } from '../pages/updates/updates';
 import { WishlistPage } from '../pages/wishlist/wishlist';
@@ -185,7 +187,9 @@ enableProdMode();
     LazyLoadDirective,
     PressDirective,
     AbsoluteDrag,
-    PinchZoomDirective
+    PinchZoomDirective,
+    BackgroundImageDirective,
+    ColorDirective
   ],
   imports: [
     DragulaModule,
@@ -252,6 +256,7 @@ enableProdMode();
   //WalletService,
   ImgcacheService,
   BlogService,
+  TranslateService,
   IonicErrorHandler,
   [{ provide: ErrorHandler, useClass: MyErrorHandler }]
   ]

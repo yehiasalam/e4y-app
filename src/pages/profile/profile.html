@@ -1,4 +1,4 @@
-<ion-header center class="{{user ? 'loggedin': 'non-loggedin'}}">
+<ion-header center class="{{user ? 'loggedin': 'non-loggedin'}}" random-bg>
  
     <ion-navbar *ngIf="!isLoggedIn" color="transparent" >
         <ion-buttons start>
@@ -21,7 +21,7 @@
         <ion-slide *ngFor="let tab of profile?.tabs; let i=index;" (click)="selectedTab(i)">
         	<div class="profile_tab">
           		<ion-icon [name]=tab.value></ion-icon>
-            	<span>{{tab.label}}</span>
+            	<span [innerHtml]="config.get_translation(tab.label)"></span>
         	</div>
         </ion-slide>
     </ion-slides>
@@ -119,7 +119,7 @@
 	                	<ion-grid id="dashboard">
 		                	<ion-row>
 							    <ion-col *ngFor="let d of profile?.data | callback: filterDashData">
-							    	<div [class]="d.key">
+							    	<div [class]="d.key" color-primary="bg">
 							    		<strong>{{d.value}}</strong>
 							    		<span>{{d.label}}</span>
 							    	</div>
@@ -168,7 +168,37 @@
 							    </ion-item>
 					  		</div>
 						</ion-list>
-	                </div>
+					</div>
+
+	                <div id="profiletabs" *ngIf="(tab.key == 'settings')">
+						<ion-list radio-group>
+							<ion-list-header [innerHtml]="config.get_translation('language')"></ion-list-header>
+						  
+							<ion-item>
+							  <ion-label>English</ion-label>
+							  <ion-radio [checked]="lang === 'en'" value="en" (ionSelect)="set_language('en')"></ion-radio>
+							</ion-item>
+						  
+							<ion-item>
+							  <ion-label>فارسی</ion-label>
+							  <ion-radio [checked]="lang === 'fa'" value="fa" (ionSelect)="set_language('fa')"></ion-radio>
+							</ion-item>
+						</ion-list>
+
+						<ion-list>
+						    <ion-list-header [innerHtml]="config.get_translation('manage_data')"></ion-list-header>
+								<ion-item>
+							    	<ion-label [innerHtml]="config.get_translation('clear_cache')"></ion-label>
+	    							<button ion-button outline item-end [innerHtml]="config.get_translation('clear_cache')" (click)="clearCache()"></button>
+					    		</ion-item>
+					    		<ion-item>
+							    	<ion-label [innerHtml]="config.get_translation('sync_data')"></ion-label>
+	    							<button ion-button outline item-end [innerHtml]="config.get_translation('sync_data')" (click)="syncData()"></button>
+								</ion-item>
+	                	</ion-list>
+	                	<button ion-button full [innerHtml]="config.get_translation('logout')" (click)="initiate_logout()"></button>
+	                </div>					
+
 	                <div id="mycourses"  *ngIf="(tab.key == 'courses')">
 	                	
 	                	<div class="message" *ngIf="!profile.data.courses" [innerHtml]="config.get_translation('no_courses')">
@@ -273,7 +303,8 @@
 					            </div>
 					        </ion-card>
 				        </div>
-	                </div>
+					</div>
+
 	                <div id="profiletabs" *ngIf="(tab.key == 'notifications')">
 
 	                	<div *ngIf="profile.data['notifications']">
@@ -288,7 +319,8 @@
 	                		<div class="message" [innerHtml]="config.get_translation('no_notification_found')">
 	                		</div>
 	                	</div>
-	                </div>
+					</div>
+					
 	                <div id="profiletabs" *ngIf="(tab.key == 'activity')">
 	                	<div *ngIf="profile.data['activity']">
 	                		<ion-list id="activity">
@@ -303,20 +335,7 @@
 	                		</div>
 	                	</div>
 	                </div>
-	                <div id="profiletabs" *ngIf="(tab.key == 'settings')">
-	                	<ion-list>
-						    <ion-list-header [innerHtml]="config.get_translation('manage_data')"></ion-list-header>
-							    <ion-item>
-							    	<ion-label [innerHtml]="config.get_translation('clear_cache')"></ion-label>
-	    							<button ion-button outline item-end [innerHtml]="config.get_translation('clear_cache')"(click)="clearCache()"></button>
-					    		</ion-item>
-					    		<ion-item>
-							    	<ion-label [innerHtml]="config.get_translation('sync_data')"></ion-label>
-	    							<button ion-button outline item-end [innerHtml]="config.get_translation('sync_data')" (click)="syncData()"></button>
-					    		</ion-item>
-	                	</ion-list>
-	                	<button ion-button full [innerHtml]="config.get_translation('logout')" (click)="initiate_logout()"></button>
-	                </div>
+
 	            </ion-slide>
 	        </ion-slides>
 	    </div>

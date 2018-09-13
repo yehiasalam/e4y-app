@@ -14,7 +14,7 @@
 
         <div class="center intro-profile" [navPush]="profilePage" >
             <img src="assets/images/icon-profile.svg" /> 
-            <div [ngClass]="{ 'fadeOutDown': animate_arrow }" *ngIf="!config.isLoggedIn">Get Started</div>
+            <div [ngClass]="{ 'fadeOutDown': animate_arrow }" *ngIf="!config.isLoggedIn">{{config.get_translation('Get Started')}}</div>
         </div>
 
         <div *ngIf="!config.isLoggedIn" class="guest-block">
@@ -31,7 +31,8 @@
     <div class="courses-container" >
 
         <div class="quote-container">
-            <span>Change is the end result of all true learning.</span>
+            <span>{{quote?.quote}}</span>
+            <span class="author">{{quote?.author}}</span>
         </div>
 
         <div *ngIf="popular.length && config.homePage.popular">

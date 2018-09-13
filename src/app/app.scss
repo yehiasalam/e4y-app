@@ -23,9 +23,13 @@
 }
 
 ion-content{
-	background-image: url(../assets/images/bg-home.jpg);
+	/*background-image: url(../assets/images/bg-home.jpg);*/
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: top center;
 }
 
+[dir=rtl] .course-menu{
+	margin-right: -20px !important;
+	margin-left: 0px !important;
+}

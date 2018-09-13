@@ -12,11 +12,14 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class Intro {
   @ViewChild('IntroTabs') introTabs: Slides;
-	tabsPage = TabsPage;
+  tabsPage = TabsPage;
+  private config: ConfigService;
+
   	constructor(
   		public navCtrl: NavController,
-      private config:ConfigService,
+      private conf:ConfigService,
   		private storage:Storage) {
+        this.config = conf;
   	}
   ngOnInit(){
     console.log(this.config);

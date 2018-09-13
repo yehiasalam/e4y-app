@@ -36,7 +36,7 @@ page-course {
 
 
 	.course-container{
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.3);
 		border-radius: 20px;
 		padding: 20px;
 		margin: 20px;
@@ -47,6 +47,7 @@ page-course {
 			border-radius: 20px;
 			margin-bottom: 40px;
 		}
+
 
 		.course-menu{
 			margin-left: -20px;
@@ -84,7 +85,7 @@ page-course {
 					left:0;bottom:0;
 					width:100%;
 					height:3px;
-					background:#073D3A;
+					background:white;
 					display:block;
 				}
 			}

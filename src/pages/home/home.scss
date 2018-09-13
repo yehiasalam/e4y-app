@@ -37,13 +37,27 @@ page-home {
 		border-radius: 20px;
 		padding: 20px;
 		margin: 20px;
+
 		.quote-container{
+			direction: rtl;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
 			background-color: rgba(0,0,0,0.4);
 			color: white;
 			padding: 20px;
 			border-radius: 20px;
 			margin-bottom: 20px;
-			text-align: center;
+			font-size: 16px;
+
+			span:first-of-type {
+				flex-basis: 100%;
+			  }
+
+			.author{
+				font-size: 14px;
+				display: inline-block;
+			}
 		}
 	}
 

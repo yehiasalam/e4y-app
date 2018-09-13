@@ -49,6 +49,7 @@ export class ProfilePage implements OnInit{
     signinForm: FormGroup;
     profileTab:any;
     imageSrc: string;
+    lang: string;
 
     mycoursesactivetab:number=0
     signupFields:{
@@ -110,6 +111,8 @@ export class ProfilePage implements OnInit{
                 username: ['',Validators.required],
                 password: ['', Validators.required],
             });
+
+            this.lang = config.settings['lang'];
         }
 
     ngOnInit(){
@@ -1010,4 +1013,20 @@ export class ProfilePage implements OnInit{
             })
         }
     }
+
+    set_language(lang){
+
+        this.config.set_settings("lang", lang);
+        this.config.set_settings("rtl", (lang === "fa") ? true : false );
+
+        let t = this.toastCtrl.create({
+            message: this.config.get_translation('language_change'),
+                duration: 3000,
+                position: 'bottom'
+            });
+            
+            t.present(); 
+
+    }
+
 }

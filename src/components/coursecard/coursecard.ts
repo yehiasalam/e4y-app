@@ -15,13 +15,15 @@ export class Coursecard implements OnInit{
     active:string='';
 	@Input('course') course;
 	url_image: string =  '';
+	private config: ConfigService;
 
     constructor(
 		private wishlistService:WishlistService,
-		private config:ConfigService,
+		private conf:ConfigService,
 		public alertCtrl: AlertController,
 		public navCtrl: NavController) {
-			this.url_image = config.settings.url;		
+			this.config = conf;
+			this.url_image = conf.settings.url;		
 		}
 
     ngOnInit(){
@@ -53,9 +55,9 @@ export class Coursecard implements OnInit{
 
 		if (this.course.locked) {
 			let alert = this.alertCtrl.create({
-				title: 'Course Locked',
-				subTitle: 'This course hasn\'t started yet. Please check back later',
-				buttons: ['OK']
+				title: this.config.get_translation('Course Locked'),
+				subTitle: this.config.get_translation('This course has not started yet. Please check back later.'),
+				buttons: [this.config.get_translation('ok')]
 			  });	
 	
 			  alert.present();
