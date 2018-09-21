@@ -14,7 +14,7 @@ export class BackgroundImageDirective {
     }
 
     ngAfterViewInit() {
-        this.el.style.backgroundImage = 'url(../assets/images/' + this.bg + '.jpg)';
+        this.el.style.backgroundImage = 'url(assets/images/' + this.bg + '.jpg)';
     }
 
 
