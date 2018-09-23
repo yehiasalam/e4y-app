@@ -121,7 +121,6 @@ export class RegisterPage implements OnInit{
                     loading.dismiss();
 
                     let toast = this.toastCtrl.create({
-                        //message: res.message,
                         message: this.config.get_translation('register_thank_you'),
                         position: 'bottom',
                         showCloseButton: true

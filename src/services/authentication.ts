@@ -336,6 +336,7 @@ export class AuthenticationService {
                 console.log('signinuser first response');
                     console.log(response);
                 if(response.status == 400) {
+                    // this will never get triggered as it's in the sucess block of the http call, but anyway
                   return "FAILURE";
                 } else if(response.status == 200) {
                     console.log('signinuser response');

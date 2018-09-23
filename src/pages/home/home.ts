@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 //import {StatusBar} from 'ionic-native';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -55,7 +56,8 @@ export class HomePage implements OnInit{
 		public userService:UserService,
 		private config:ConfigService,
 		private wishlistService:WishlistService,
-		public splashscreen: SplashScreen
+		public splashscreen: SplashScreen,
+		public iab: InAppBrowser
 		/*private walletService:WalletService*/ 
 	) {
 		this.splashscreen = splashscreen;
@@ -144,6 +146,11 @@ export class HomePage implements OnInit{
 	openSearch(){
 		let modal = this.modalCtrl.create(SearchPage);
     	modal.present();
+	}
+
+	gotoPrivacy(){
+		let browser = this.iab.create('http://cheshmecreativechallenges.com/privacy-policy', '_system');
+
 	}
 
 }

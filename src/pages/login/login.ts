@@ -39,7 +39,6 @@ export class LoginPage implements OnInit{
 	user: User;
     profile: Profile;
     currentTab:string='dashboard';
-
     
     signupForm: FormGroup;
     signinForm: FormGroup;
@@ -58,7 +57,7 @@ export class LoginPage implements OnInit{
         private auth: AuthenticationService, 
         private userService:UserService,
         private platform:Platform,
-        private config:ConfigService,
+        public config:ConfigService,
         private storage:Storage,
         private formBuilder:FormBuilder,
         private loadingCtrl:LoadingController,
@@ -83,6 +82,7 @@ export class LoginPage implements OnInit{
                 username: ['',Validators.required],
                 password: ['', Validators.required],
             });
+
         }
 
     ngOnInit(){
@@ -120,7 +120,7 @@ export class LoginPage implements OnInit{
             let env = this;
             this.auth.signinUser(this.signinForm.value).subscribe(res=>{
                 if(res){
-                    
+
                     let toast = env.toastCtrl.create({
                         message: res.message,
                         duration: 4000,
@@ -134,15 +134,36 @@ export class LoginPage implements OnInit{
                         });
                     }
                     /*loading.onDidDismiss(() => {
-                    	console.log('Dismissing now ...');
-                    	env.viewCtrl.dismiss();
-  						env.appCtrl.getRootNav().push(BlogPage);
+                        console.log('Dismissing now ...');
+                        env.viewCtrl.dismiss();
+                            env.appCtrl.getRootNav().push(BlogPage);
                     });*/
                     toast.present();
                     loading.dismiss();
-                    
                 }
+            }, 
+            /* handle error*/
+            res => {
+                var msg: string;
+                if (res.status == 404){
+                    // user is pending activation
+                    msg = this.config.get_translation('login_pending');
+                } else if (res.status == 401){
+                    // authentication problems
+                    msg = this.config.get_translation('login_invalid');             
+                } else {
+                    // server error 500
+                    msg = this.config.get_translation('login_error');  
+                }
+                let toast = env.toastCtrl.create({
+                    message: msg,
+                    duration: 4000,
+                    position: 'bottom'
+                });
+                toast.present();             
             });
+
+            loading.dismiss();
         }
     }
 

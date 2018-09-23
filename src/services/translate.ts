@@ -14,7 +14,11 @@ export class TranslateService {
 			'login_description': 'Join our 7 week challenge and learn creative forms of expressions, from media editing to storytelling.',
 
 			'register_thank_you': 'Thanks for your interest in joining the program. We will get back to you shortly by email with your approval status.',
-			'register_button_label': 'Join the Program',
+            'register_button_label': 'Join the Program',
+            
+            'login_pending': 'Your account is still pending approval by the Cheshme team. You will recieve an email once approved.',
+            'login_error': 'An error occured while logging you in',
+            'login_invalid': 'Your username/password combination did not work. Please try again',
 
 			'home_title':'Learning Journey',
 			'home_subtitle':'Featured Items',
@@ -258,8 +262,14 @@ export class TranslateService {
             'Continue your 7 Week Challenge': 'ادامه چالش 7 هفته شما' ,
             'Instructor': 'مربی' ,
             'login_description': 'به چالش 7 هفته ما بپیوندید و انواع مختلف اصطلاحات خلاقانه، از ویرایش رسانه ای گرفته تا قصه گويي را یاد بگیرید.' ,
+            
             'register_thank_you': 'از علاقه تان به پیوستن به برنامه متشکریم. ما به زودی با ایمیل با تایید وضعیتتان با شما تماس خواهیم گرفت.' ,
             'register_button_label': 'پیوستن به برنامه' ,
+
+            'login_pending': 'حساب شما هنوز در انتظار تایید تیم است. پس از تایید، یک ایمیل دریافت خواهید کرد.',
+            'login_error': 'هنگام ورود به سیستم یک خطایی روی داد',
+            'login_invalid': 'ترکیب نام کاربری و کلمه عبور شما کار نمی کند لطفا دوباره تلاش کنید.',
+
             'home_title': 'سفر آموزشی' ,
             'home_subtitle': 'آیتم های ویژه' ,
             'start_course': 'شروع دوره' ,
@@ -479,18 +489,18 @@ export class TranslateService {
             'Activity': 'فعالیتها' ,
             'My Courses': 'دوره های  آموزشی من' ,
             'Notifications': 'اعلانات',
-            'Learn anywhere': 'در هر جا یاد بگیرید',
-            'Get started with mobile learning': 'با یادگیری موبایل شروع کنید',
-            'Learn and Earn Skills': 'یاد بگیرید و مهارت پیدا کنید',
-            'Get rewards, certificates & badges': 'پاداش، گواهینامه، مدرک و کارت نشان  بگیرید ',
-            'Proceed': 'اقدام کنید ',
-            'Anywhere, anytime': 'هر مکان،هر زمان',
-            'Boost your career growth with anytime anywhere learning!': 'مقام و موقعیت خود را با یادگیری در هر زمان و هر مکان بالا ببرید',
-            'Cheshme Creative Challenges': 'چالشهای خلاق چشمه ',
-            'Get Started Now!': 'همین الان شروع کنید',
-            'Get Started': 'شروع کنید',
-            'Course Locked': 'دوره بسته شد',
-            'This course has not started yet. Please check back later.': 'دوره هنوز شروع نشده است. لطفا بعدا چک کنید '
+            'Learn anywhere': 'تبادل اطلاعات به زبان تصویر و هنر',
+            'Get started with mobile learning': 'اطلاع‌رسانی و حل مشکلات دنیای امروز',
+            'Learn and Earn Skills': 'معرفی مهارت‌های هنری و طرح مسائل محیط‌زیستی',
+            'Get rewards, certificates & badges': 'قصه‌ها و تجربه‌هاتون را با دنیا قسمت کنین',
+            'Proceed': 'بزن بریم',
+            'Anywhere, anytime': 'تبادل اطلاعات به زبان تصویر و هنر',
+            'Boost your career growth with anytime anywhere learning!': 'بخشی از روند حل چالش‌های دنیای امروز باشید',
+            'Cheshme Creative Challenges': 'چالش‌های خلاق چشمه',
+            'Get Started Now!': 'بزن بریم',
+            'Get Started': 'بزن بریم',
+            'Course Locked': 'برای بازشدن این چالش باید صبر کنی',
+            'This course has not started yet. Please check back later.': 'این چالش هنوز کلید نخورده، بعدن سر بزن'
         };
     }
 
