@@ -74,7 +74,7 @@ export class ConfigService{
 			'version':2,
 			//'url':'http://localhost/wplms/',
 			//'client_id':'X8bmmV0UE1AvZbnS7Rl7pCU',
-			'url':'http://cheshmecreativechallenges.com/',
+			'url':'https://cheshmecreativechallenges.com/',
 			'client_id':'JUUY8FXlszqEtuI3bahWpco',
 			'client_secret':'', //Fetched from API call
 			'state':'', // FETCHED from Site
